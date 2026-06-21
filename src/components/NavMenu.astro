@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../utils/url";
+
 const navItemClass =
   "text-3xl hover:text-primary underline underline-offset-4 decoration-transparent hover:decoration-primary transition-colors duration-200";
 
@@ -39,7 +41,7 @@ const sections = [
         <h1 class="text-5xl content-center font-bold w-max">Herndon&nbsp;Robotics</h1>
 
         <template x-if="true" x-data>
-        <img src="/logo.png" class="h-full w-auto object-contain"></img>
+        <img src={withBase("logo.png")} class="h-full w-auto object-contain"></img>
         </template>
       </div>
 

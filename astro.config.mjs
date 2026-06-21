@@ -7,5 +7,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://generic-coder-1.github.io/testing-github-action-and-astro/',
+  site: 'https://generic-coder-1.github.io',
+  base: '/testing-github-action-and-astro'
 });
