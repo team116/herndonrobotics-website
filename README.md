@@ -1,5 +1,5 @@
 # The Website
-This the code for the official website for Herndon Robotics. If you wish to visit the website, head to to [this website](https://herndonrobotics.org)(it links to our old website for now). This repo is for development, not to view our website. It is a static website that is built with Astro + Tailwind, using HTMX and Alpine.js for interactivity (the "AHA stack").
+This the code for the official website for Herndon Robotics. If you wish to visit the website, head to to [this website](https://herndonrobotics.org). It is a static website that is built with Astro + Tailwind, using HTMX and Alpine.js for interactivity (the "AHA stack").
 
 ## How to Run?
 To run a local version of this website you will need:
@@ -33,4 +33,3 @@ Here is some documentation for the tools we use:
 - [HTMX](https://htmx.org/docs/)
 
 One important thing to note is to **NEVER PUSH TO MAIN**. We have(not yet but we will soon) a github workflow set up to automatically update the server with the latest commit to main. If you push to main with unfinished and broken code, it will break the website for everybody. Develop on a separate branch, then create a pull request when you think your code is ready to pushed to the official website.
->>>>>>> aee0421 (init commit)
