@@ -2,7 +2,7 @@
 import { withBase } from "../utils/url";
 
 const navItemClass =
-  "text-3xl hover:text-primary underline underline-offset-4 decoration-transparent hover:decoration-primary transition-colors duration-200";
+  "text-xl hover:text-primary underline underline-offset-4 decoration-transparent hover:decoration-primary transition-colors duration-200";
 
   
 const sections = [
@@ -33,17 +33,54 @@ const sections = [
     ],
   },
 ];
+
+const social_links = [
+  {
+    social: "facebook",
+    link: "https://example.com"
+  },
+  {
+    social: "x",
+    link: "https://example.com"
+  },
+  {
+    social: "github",
+    link: "https://example.com"
+  },
+  {
+    social: "instagram",
+    link: "https://example.com"
+  },
+].map((social)=>({
+  social: "/src/images/social/"+social.social+".svg",
+  link: social.link,
+}))
 ---
 
 <div class="px-4 py-2 bg-muted border border-border flex flex-row justify-between max-w-full w-full h-24">
-      <!-- Team Logo & Name -->
-      <div class="flex flex-row gap-4 w-min">
-        <h1 class="text-5xl content-center font-bold w-max">Herndon&nbsp;Robotics</h1>
+  <!-- Team Logo & Name -->
+  <div class="flex flex-row gap-4 w-min">
+    <h1 class="text-5xl content-center font-bold w-max">Herndon&nbsp;Robotics</h1>
+    
+    <template x-if="true" x-data>
+      <img src={withBase("logo.png")} class="h-full w-auto object-contain"></img>
+    </template>
 
-        <template x-if="true" x-data>
-        <img src={withBase("logo.png")} class="h-full w-auto object-contain"></img>
-        </template>
-      </div>
+
+  <div class="grid grid-cols-2 h-full grid-rows-2 aspect-square" id="socials">
+    {social_links.map((social) => (
+      <a 
+        href={social.link}
+        class="flex items-center justify-center bg-foreground m-0.5"
+        style={
+          `mask-image: url('${social.social}');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;`
+        }></a>
+    ))}
+  </div>
+  </div>
 
   <!-- Navigation -->
   <nav class="flex max-w-max flex-1 items-center justify-center px-4 py-4 gap-4" aria-label="Main">
@@ -56,7 +93,7 @@ const sections = [
         @keydown.escape="open = false"
         @click.outside="open = false"
       >
-        <div class="flex flex-row items-center gap-2">
+        <div class="flex flex-row items-center gap-0.5">
           <button
             type="button"
             x-ref="button"
@@ -66,7 +103,7 @@ const sections = [
           >
             {section.label}
           </button>
-          <svg class="size-6 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <svg class="size-5 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
           </svg>
         </div>
