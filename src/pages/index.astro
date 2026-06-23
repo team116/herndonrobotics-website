@@ -2,10 +2,26 @@
 import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/slider/*', { eager: true });
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/slider/*",
+  { eager: true },
+);
 const srcs = Object.keys(images);
-
 ---
+
 <Layout title="Home">
-  <ImageSlider images={srcs}>
+  <div>
+    <ImageSlider images={srcs}>
+      <div
+        class="absolute inset-0 z-1 flex flex-col justify-center bg-red-500/50 text-white"
+      >
+        <div class="p-2 text-center">
+          <h2 class="text-lg font-bold sm:text-3xl">
+            From small changes come big differences.
+          </h2>
+          <h3 class="mt-1.5 font-medium text-2xl">Epsilon Delta</h3>
+        </div>
+      </div>
+    </ImageSlider>
+  </div>
 </Layout>

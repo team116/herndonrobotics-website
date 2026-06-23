@@ -6,14 +6,9 @@ const { images } = Astro.props;
 ---
 
 <!-- Image Slider: In The Background, Behind Content --><!-- An Alpine.js and Tailwind CSS component by https://pinemix.com -->
-<div id="slider" data-images={JSON.stringify(images)}>
-</div>
 <script>
   import Alpine from "alpinejs";
-
-  const el = document.getElementById('slider')!;
-  const images = JSON.parse(el.dataset.images!) as string[];
-  Alpine.data("imageArray", () => ({
+  Alpine.data("imageArray", (images: string[]) => ({
     // Images array
     images: images,
 
@@ -157,7 +152,7 @@ const { images } = Astro.props;
     },
   }));
 </script>
-<div x-data=`imageArray` class="relative mx-auto w-full max-w-full">
+<div x-data={`imageArray(` +JSON.stringify(images)+ ')'} class="relative mx-auto w-full max-w-full">
   <!-- Image Slider Container -->
   <div
     class="relative overflow-hidden focus:outline-hidden focus-visible:ring-4 focus-visible:ring-teal-400/60"
@@ -287,14 +282,7 @@ const { images } = Astro.props;
   <!-- END Dots Navigation -->
 
   <!-- Content -->
-  <div
-    class="absolute inset-0 z-1 flex flex-col justify-center bg-black/50 text-white"
-  >
-    <div class="p-2 text-center">
-      <h2 class="text-lg font-bold sm:text-3xl">3 amazing places to visit</h2>
-      <h3 class="mt-1.5 font-medium text-zinc-200">Get inspired today</h3>
-    </div>
-  </div>
+   <slot></slot>
   <!-- END Content -->
 </div>
 <!-- END Image Slider: In The Background, Behind Content -->
