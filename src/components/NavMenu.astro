@@ -50,47 +50,45 @@ const sections = [
     <a href={withBase('/')} class={navItemClass}>Home</a>
 
     {sections.map((section) => (
-  <div
-    class="relative"
-    x-data="{open: false}"
-    @keydown.escape="open = false"
-    @click.outside="open = false"
-  >
-    <div class="flex flex-row items-center">
-      <button
-        type="button"
-        x-ref="button"
-        class={navItemClass}
-        :aria-expanded="open"
-        @click="open = !open"
+      <div
+        class="relative"
+        x-data="{open: false}"
+        @keydown.escape="open = false"
+        @click.outside="open = false"
       >
-        {section.label}
-      </button>
-        <svg class="size-6 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-      </svg>
-    </div>
-    <template x-if="true">
-      <ul
-        x-show="open"
-        x-transition
-        class="absolute top-full mt-2 w-96 max-w-[calc(100vw-2rem)] bg-popover border border-border shadow-lg p-2 z-50 bg-background"
-        x-anchor.bottom-start="$refs.button"
-        x-effect="$el.style.width = ($refs.trigger.offsetWidth * 1.5) + 'px'"
-        >
-        {section.items.map((item) => (
-          <li>
-            <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-accent hover:text-accent-foreground">
-              <div class="text-base font-medium">{item.title}</div>
-              <p class="text-base text-muted-foreground group-hover:text-accent-foreground">{item.desc}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </template>
-  </div>
-))}
-
+        <div class="flex flex-row items-center">
+          <button
+            type="button"
+            x-ref="button"
+            class={navItemClass}
+            :aria-expanded="open"
+            @click="open = !open"
+          >
+            {section.label}
+          </button>
+            <svg class="size-6 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+          </svg>
+        </div>
+        <template x-if="true">
+          <ul
+            x-show="open"
+            x-transition
+            class="absolute top-full mt-2 w-80 max-w-[calc(100vw-2rem)] bg-popover border border-border shadow-lg p-2 z-50 bg-background"
+            x-anchor.bottom-start="$refs.button"
+          >
+            {section.items.map((item) => (
+              <li>
+                <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300">
+                  <div class="text-base font-medium">{item.title}</div>
+                  <p class="text-base text-muted-foreground group-hover:text-accent-foreground">{item.desc}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </template>
+      </div>
+    ))}
     <a href={withBase('/blog')} class={navItemClass}>Blog</a>
   </nav>
 </div>

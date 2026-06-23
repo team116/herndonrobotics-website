@@ -1,6 +1,11 @@
 ---
+import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/slider/*', { eager: true });
+const srcs = Object.keys(images);
+
 ---
 <Layout title="Home">
-  <h1>hello</h1>
+  <ImageSlider images={srcs}>
 </Layout>
