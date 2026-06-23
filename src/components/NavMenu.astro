@@ -52,48 +52,31 @@ const sections = [
     {sections.map((section) => (
   <div
     class="relative"
-    x-data={`{
-      open: false,
-      align: 'center',
-      toggleOpen() {
-        this.open = !this.open;
-        if (this.open) {
-          this.$nextTick(() => {
-            const rect = this.$el.getBoundingClientRect();
-            const panelWidth = 384;
-            const margin = 8;
-            if (rect.left + rect.width / 2 - panelWidth / 2 < margin) {
-              this.align = 'left';
-            } else if (rect.left + rect.width / 2 + panelWidth / 2 > window.innerWidth - margin) {
-              this.align = 'right';
-            } else {
-              this.align = 'center';
-            }
-          });
-        }
-      }
-    }`}
+    x-data="{open: false}"
     @keydown.escape="open = false"
     @click.outside="open = false"
   >
-    <button
-      type="button"
-      class={navItemClass}
-      :aria-expanded="open"
-      @click="toggleOpen()"
-    >
-      {section.label}
-    </button>
+    <div class="flex flex-row items-center">
+      <button
+        type="button"
+        x-ref="button"
+        class={navItemClass}
+        :aria-expanded="open"
+        @click="open = !open"
+      >
+        {section.label}
+      </button>
+        <svg class="size-6 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+      </svg>
+    </div>
     <template x-if="true">
       <ul
         x-show="open"
         x-transition
         class="absolute top-full mt-2 w-96 max-w-[calc(100vw-2rem)] bg-popover border border-border shadow-lg p-2 z-50 bg-background"
-        class="{
-          'left-1/2 -translate-x-1/2': align === 'center',
-          'left-0': align === 'left',
-          'right-0': align === 'right',
-        }"
+        x-anchor.bottom-start="$refs.button"
+        x-effect="$el.style.width = ($refs.trigger.offsetWidth * 1.5) + 'px'"
         >
         {section.items.map((item) => (
           <li>
