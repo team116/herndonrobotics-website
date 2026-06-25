@@ -16,6 +16,6 @@ export const social_links = [
     link: "https://example.com"
   },
 ].map((social)=>({
-  social: "/src/images/social/"+social.social+".svg",
+  social: "social/"+social.social+".svg",
   link: social.link,
 }))

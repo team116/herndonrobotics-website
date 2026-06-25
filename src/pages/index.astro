@@ -3,10 +3,10 @@ import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/images/slider/*",
+  "/src/images/slider/*.{png,jpg,jpeg,webp,svg}",
   { eager: true },
 );
-const srcs = Object.keys(images);
+const srcs = Object.values(images).map((image)=>(image.default.src));
 ---
 
 <Layout title="Home">
