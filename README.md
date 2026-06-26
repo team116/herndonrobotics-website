@@ -32,4 +32,4 @@ Here is some documentation for the tools we use:
 - [Alpine.js](https://alpinejs.dev/start-here)
 - [HTMX](https://htmx.org/docs/)
 
-One important thing to note is to **NEVER PUSH TO MAIN**. We have(not yet but we will soon) a github workflow set up to automatically update the server with the latest commit to main. If you push to main with unfinished and broken code, it will break the website for everybody. Develop on a separate branch, then create a pull request when you think your code is ready to pushed to the official website.
+One important thing to note is to **NEVER PUSH TO MAIN**. We have a github workflow set up to automatically build the latest push to main. If you push to main with unfinished and broken code, it will break the website for everybody. Develop on a separate branch, then create a pull request when you think your code is ready to pushed to the official website.

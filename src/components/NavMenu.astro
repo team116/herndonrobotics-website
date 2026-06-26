@@ -1,15 +1,16 @@
 ---
 import { withBase } from "../utils/url";
+import {social_links} from "../utils/socials"
 
 const navItemClass =
-  "text-3xl hover:text-primary underline underline-offset-4 decoration-transparent hover:decoration-primary transition-colors duration-200";
+  "text-2xl hover:text-primary underline underline-offset-4 decoration-transparent hover:decoration-primary transition-colors duration-200";
 
   
 const sections = [
   {
     label: "About Us",
     items: [
-      { title: "Who are we?", href: "/about-us", desc: "Who is Herndon Robotics and what do we stand for?" },
+      { title: "Who are we?", href: "/about-us", desc: "What is Herndon Robotics and what do we stand for?" },
       { title: "Portfolio", href: "/portfolio", desc: "What we've done over the years." },
       { title: "Team Members", href: "/team-members", desc: "Mentors + Students" },
       { title: "Sponsors", href: "/sponsors", desc: "Who supports us?" },
@@ -33,81 +34,76 @@ const sections = [
     ],
   },
 ];
+
+
 ---
 
-<div class="px-4 py-2 bg-muted border border-border flex flex-row justify-between max-w-full w-full h-24">
-      <!-- Team Logo & Name -->
-      <div class="flex flex-row gap-4 w-min">
-        <h1 class="text-5xl content-center font-bold w-max">Herndon&nbsp;Robotics</h1>
-
-        <template x-if="true" x-data>
-        <img src={withBase("logo.png")} class="h-full w-auto object-contain"></img>
-        </template>
-      </div>
+<div class="px-4 py-2 bg-muted border border-border flex flex-row justify-between max-w-full w-full font-audiowide">
+  <!-- Team Logo & Name -->
+  <div class="flex flex-row gap-4 w-min">
+    <h1 class="text-5xl content-center font-bold w-max tracking-tighter text-center">Epsilon<br>Delta</h1>
+    
+    <img src={withBase("logo.png")} class="h-24 w-auto object-contain"></img>
+    
+    <div class="grid grid-cols-2 h-full grid-rows-2 aspect-square" id="socials">
+      {social_links.map((social) => (
+        <a 
+          href={social.link}
+          class="flex items-center justify-center bg-foreground m-0.5"
+          style={
+            `mask-image: url('${social.social}');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;`
+          }></a>
+      ))}
+    </div>
+  </div>
 
   <!-- Navigation -->
   <nav class="flex max-w-max flex-1 items-center justify-center px-4 py-4 gap-4" aria-label="Main">
     <a href={withBase('/')} class={navItemClass}>Home</a>
 
     {sections.map((section) => (
-  <div
-    class="relative"
-    x-data={`{
-      open: false,
-      align: 'center',
-      toggleOpen() {
-        this.open = !this.open;
-        if (this.open) {
-          this.$nextTick(() => {
-            const rect = this.$el.getBoundingClientRect();
-            const panelWidth = 384;
-            const margin = 8;
-            if (rect.left + rect.width / 2 - panelWidth / 2 < margin) {
-              this.align = 'left';
-            } else if (rect.left + rect.width / 2 + panelWidth / 2 > window.innerWidth - margin) {
-              this.align = 'right';
-            } else {
-              this.align = 'center';
-            }
-          });
-        }
-      }
-    }`}
-    @keydown.escape="open = false"
-    @click.outside="open = false"
-  >
-    <button
-      type="button"
-      class={navItemClass}
-      :aria-expanded="open"
-      @click="toggleOpen()"
-    >
-      {section.label}
-    </button>
-    <template x-if="true">
-      <ul
-        x-show="open"
-        x-transition
-        class="absolute top-full mt-2 w-96 max-w-[calc(100vw-2rem)] bg-popover border border-border shadow-lg p-2 z-50 bg-background"
-        class="{
-          'left-1/2 -translate-x-1/2': align === 'center',
-          'left-0': align === 'left',
-          'right-0': align === 'right',
-        }"
-        >
-        {section.items.map((item) => (
-          <li>
-            <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-accent hover:text-accent-foreground">
-              <div class="text-base font-medium">{item.title}</div>
-              <p class="text-base text-muted-foreground group-hover:text-accent-foreground">{item.desc}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </template>
-  </div>
-))}
-
+      <div
+        class="relative"
+        x-data="{open: false}"
+        @keydown.escape="open = false"
+        @click.outside="open = false"
+      >
+        <div class="flex flex-row items-center gap-0.5">
+          <button
+            type="button"
+            x-ref="button"
+            class={navItemClass}
+            :aria-expanded="open"
+            @click="open = !open"
+          >
+            {section.label}
+          </button>
+          <svg class="size-5 transition-transform" :class="open && 'rotate-180'" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+          </svg>
+        </div>
+        <template x-if="true">
+          <ul
+            x-show="open"
+            x-transition
+            class="absolute top-full mt-2 w-80 max-w-[calc(100vw-2rem)] bg-popover border border-border shadow-lg p-2 z-50 bg-background"
+            x-anchor.bottom-start="$refs.button"
+          >
+            {section.items.map((item) => (
+              <li>
+                <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300">
+                  <div class="text-base font-medium">{item.title}</div>
+                  <p class="text-base text-muted-foreground group-hover:text-accent-foreground">{item.desc}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </template>
+      </div>
+    ))}
     <a href={withBase('/blog')} class={navItemClass}>Blog</a>
   </nav>
 </div>
