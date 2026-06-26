@@ -18,6 +18,7 @@ const { images } = Astro.props;
     transition: "slide", // '' for no transition, 'fade', 'slide', 'blur-sm'
     loop: true,
     autoplay: true,
+    blur:true,
     autoplayDuration: 5000,
     autoplayProgressBar: false,
 
@@ -181,7 +182,8 @@ const { images } = Astro.props;
             'blur-xl opacity-0': transition === 'blur-sm' && currentIndex !== index,
             'translate-x-0': transition === 'slide' && currentIndex === index,
             '-translate-x-full': transition === 'slide' && currentIndex > index,
-            'translate-x-full': transition === 'slide' && currentIndex < index
+            'translate-x-full': transition === 'slide' && currentIndex < index,
+            'blur-sm': blur,
           }"
           role="group"
           aria-roledescription="slide"

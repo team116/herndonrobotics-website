@@ -3,7 +3,7 @@ import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/images/slider/*.{png,jpg,jpeg,webp,svg}",
+  "/src/images/slider/*.{png,JPG,jpg,jpeg,webp,svg}",
   { eager: true },
 );
 const srcs = Object.values(images).map((image)=>(image.default.src));
@@ -11,6 +11,8 @@ const srcs = Object.values(images).map((image)=>(image.default.src));
 
 <Layout title="Home">
   <div>
+    {/*Slider*/}
+    <div aria-label={JSON.stringify(srcs)}></div>
     <ImageSlider images={srcs}>
       <div
         class="absolute inset-0 z-1 flex flex-col justify-center bg-red-500/50 text-white"
