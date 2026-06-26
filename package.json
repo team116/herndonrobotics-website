@@ -15,6 +15,7 @@
     "@alpinejs/anchor": "^3.15.12",
     "@fontsource-variable/geist": "^5.2.9",
     "@fontsource-variable/oxanium": "^5.2.8",
+    "@fontsource/audiowide": "^5.2.7",
     "@tailwindcss/vite": "^4.3.1",
     "alpinejs": "^3.14.8",
     "astro": "^6.4.7",

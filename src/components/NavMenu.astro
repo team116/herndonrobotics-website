@@ -38,15 +38,12 @@ const sections = [
 
 ---
 
-<div class="px-4 py-2 bg-muted border border-border flex flex-row justify-between max-w-full w-full h-24">
+<div class="px-4 py-2 bg-muted border border-border flex flex-row justify-between max-w-full w-full font-audiowide">
   <!-- Team Logo & Name -->
   <div class="flex flex-row gap-4 w-min">
-    <h1 class="text-5xl content-center font-bold w-max">Herndon&nbsp;Robotics</h1>
+    <h1 class="text-5xl content-center font-bold w-max tracking-tighter text-center">Epsilon<br>Delta</h1>
     
-    <template x-if="true" x-data>
-      <img src={withBase("logo.png")} class="h-full w-auto object-contain"></img>
-    </template>
-
+    <img src={withBase("logo.png")} class="h-24 w-auto object-contain"></img>
     
     <div class="grid grid-cols-2 h-full grid-rows-2 aspect-square" id="socials">
       {social_links.map((social) => (
