@@ -8,9 +8,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  markdown: {
-    gfm: true,
-  },
   integrations: [mdx()],
   site: 'https://www.herndonrobotics.org/',
   base: ''

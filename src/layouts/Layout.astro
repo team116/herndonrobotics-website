@@ -21,9 +21,6 @@ const { title } = Astro.props;
     <!-- Initialize Alpine and make it globally accessible so that one components can access and use it-->
     <script>
       import Alpine from "alpinejs";
-      import anchor from "@alpinejs/anchor";
-
-      Alpine.plugin(anchor);
       window.Alpine = Alpine;
     </script>
 
