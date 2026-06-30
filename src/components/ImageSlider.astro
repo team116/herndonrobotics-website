@@ -18,7 +18,7 @@ const { images } = Astro.props;
     transition: "slide", // '' for no transition, 'fade', 'slide', 'blur-sm'
     loop: true,
     autoplay: true,
-    blur:true,
+    blur: true,
     autoplayDuration: 5000,
     autoplayProgressBar: false,
 
@@ -153,7 +153,10 @@ const { images } = Astro.props;
     },
   }));
 </script>
-<div x-data={`imageArray(` +JSON.stringify(images)+ ')'} class="relative mx-auto w-full max-w-full">
+<div
+  x-data={`imageArray(` + JSON.stringify(images) + ")"}
+  class="relative mx-auto w-full max-w-full"
+>
   <!-- Image Slider Container -->
   <div
     class="relative overflow-hidden focus:outline-hidden focus-visible:ring-4 focus-visible:ring-teal-400/60"
@@ -284,7 +287,7 @@ const { images } = Astro.props;
   <!-- END Dots Navigation -->
 
   <!-- Content -->
-   <slot></slot>
+  <slot />
   <!-- END Content -->
 </div>
 <!-- END Image Slider: In The Background, Behind Content -->
