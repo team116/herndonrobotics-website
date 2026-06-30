@@ -39,9 +39,9 @@ const { title } = Astro.props;
       media.addEventListener("change", applyTheme);
     </script>
   </head>
-  <body>
+  <body class="flex flex-col min-h-dvh">
     <NavMenu />
-    <main>
+    <main class="flex-1 content-center">
       <slot />
     </main>
     <Footer />

@@ -5,11 +5,11 @@ import { social_links } from "../utils/socials";
 <div
   class="flex flex-row w-full h-24 bg-muted px-10 font-geist text-gray-500 justify-between"
 >
-  <div class="content-center">
+  <div class="content-center text-lg">
     © {new Date().getFullYear()} Herndon Robotics | Epsilon Delta | FRC 116 | FTC
     519
   </div>
-  <div class="flex flex-row items-center h-full aspect-square g-2" id="socials">
+  <div class="flex flex-row items-center h-full aspect-square g-2 text-2xl" id="socials">
       {social_links.map((social) => (
         <a 
           href={social.link}
