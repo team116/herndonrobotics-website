@@ -1,11 +1,11 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from 'astro:assets';
 import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
-import RobotImage from "/src/images/generic/FRC_robot_homepage.jpg";
+import RobotImage from "/src/assets/generic/FRC_robot_homepage.jpg";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/images/slider/*.{png,JPG,jpg,jpeg,webp,svg}",
+  "/src/assets/slider/*.{png,JPG,jpg,jpeg,webp,svg}",
   { eager: true },
 );
 const srcs = Object.values(images).map((image) => image.default.src);
@@ -28,6 +28,7 @@ const srcs = Object.values(images).map((image) => image.default.src);
     </div>
   </ImageSlider>
 
+  {/*small about us*/}
   <div class="m-16 flex flex-row gap-16">
     <Image
       src={RobotImage}

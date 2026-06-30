@@ -1,10 +1,89 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Portfolio from "../components/Portfolio.astro";
+
+const portfolio = await getCollection("portfolio");
 ---
 
 <Layout title="Who Are We?">
-  <div class="max-w-3xl mx-auto px-4 py-16">
-    <h1 class="text-5xl font-bold mb-4">Who Are We?</h1>
-    <p class="text-muted-foreground text-lg">Page coming soon.</p>
+  <div class="p-8 gap-12 flex flex-col">
+    <section id="WhoAreWe">
+      <div class="flex flex-col flex-1 justify-center">
+        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+          <i>Who Are We?</i>
+        </h2>
+
+        <div class="text-xl text-foreground">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+            non viverra dui. Pellentesque dapibus magna massa, id convallis
+            felis bibendum at. Mauris suscipit nunc lectus, ut maximus lorem
+            pellentesque ut. Proin suscipit nibh quis molestie cursus. Phasellus
+            tristique dui augue, at ullamcorper lorem pellentesque a. In ut
+            interdum urna. Integer pulvinar dolor et nisl vestibulum
+            sollicitudin. Fusce laoreet euismod tempor. Praesent vel sodales
+            orci, a ullamcorper nisi. Nullam gravida tellus id tellus facilisis,
+            sit amet efficitur nisl efficitur. Proin ac quam faucibus,
+            scelerisque ante vitae, dapibus dui.
+            <br />
+            <br />
+            Phasellus dictum, lectus id efficitur dapibus, leo ex condimentum dui,
+            et accumsan elit purus sit amet dolor. Maecenas lobortis sem efficitur
+            tellus tincidunt aliquam. Praesent sit amet nisi ligula. Etiam ornare
+            neque sit amet turpis eleifend, et malesuada nisi hendrerit. Suspendisse
+            nec maximus sapien. Suspendisse pellentesque tincidunt erat non iaculis.
+            Aliquam aliquam pulvinar mauris eget volutpat. Praesent molestie est in
+            enim sagittis, vel faucibus lectus efficitur. Maecenas vel libero varius,
+            mollis ex at, sodales risus. Phasellus sagittis pulvinar ante a condimentum.
+            Donec pellentesque felis quis euismod luctus.
+            <br />
+            <br />
+            Integer feugiat eu libero ut elementum. Nulla placerat nisl id odio viverra
+            eleifend. Aenean efficitur purus id risus porttitor, nec lobortis lectus
+            pharetra. Maecenas quis erat quis massa sollicitudin sollicitudin. Fusce
+            auctor luctus ligula sed pretium. Mauris ultrices imperdiet ante eleifend
+            imperdiet. Aliquam erat volutpat. Maecenas finibus leo non lorem imperdiet,
+            sed scelerisque risus ullamcorper. Morbi vitae est porta, maximus nisl
+            vulputate, aliquet felis. Mauris porta lorem iaculis, posuere neque ut,
+            viverra nisi. Curabitur consequat sapien vitae nisl mattis vestibulum.
+            Aliquam semper nulla ex, eu ultrices ante sagittis ut.
+            <br />
+            <br />
+            Sed lacinia dapibus orci. Nulla suscipit felis nec sollicitudin vulputate.
+            Sed semper suscipit tincidunt. Phasellus at sem in quam aliquam tempus.
+            Quisque sodales quam a ipsum laoreet feugiat. Pellentesque ut vehicula
+            erat. Fusce convallis purus vitae elementum egestas. Nullam ut quam cursus
+            dui vehicula pretium vitae quis augue. Fusce pharetra tristique varius.
+            Proin vitae fermentum felis. Integer quis suscipit mi. Ut eget urna ut
+            eros posuere ultricies. Quisque efficitur odio ut arcu hendrerit fringilla.
+            <br />
+            <br />
+            Cras vel ligula vitae ex euismod rhoncus maximus id massa. Nulla commodo
+            leo vel purus tincidunt, eu tempus sapien tempus. Sed maximus massa sed
+            magna porta, id mattis ipsum tincidunt. Nunc vel tempus velit, sed fringilla
+            urna. Nullam nunc leo, cursus eget sagittis non, dapibus at nisi. Phasellus
+            quam purus, interdum et leo et, congue feugiat ligula. Sed eget aliquam
+            eros. Fusce quis diam non lacus pellentesque lacinia sed sit amet mauris.
+            In ullamcorper varius vestibulum. Vestibulum aliquam laoreet porta. Suspendisse
+            lorem elit, finibus nec dapibus a, consequat vel neque. Donec non rhoncus
+            risus. Nunc vel fermentum nulla. Nunc sit amet mattis velit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <section id="portfolio">
+      <div class="flex flex-col flex-1 justify-center">
+        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+          <i>Portfolio</i>
+        </h2>
+        <div class="grid grid-cols-5 gap-8">
+          {portfolio.map((item) => <Portfolio entry={item} />)}
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>
