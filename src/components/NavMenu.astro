@@ -10,27 +10,27 @@ const sections = [
   {
     label: "About Us",
     items: [
-      { title: "Who are we?", href: "/about-us", desc: "What is Herndon Robotics and what do we stand for?" },
-      { title: "Portfolio", href: "/portfolio", desc: "What we've done over the years." },
-      { title: "Team Members", href: "/team-members", desc: "Mentors + Students" },
-      { title: "Sponsors", href: "/sponsors", desc: "Who supports us?" },
+      { title: "Who are we?", href: "/about-us#WhoAreWe", desc: "What is Herndon Robotics and what do we stand for?" },
+      { title: "Portfolio", href: "/about-us#portfolio", desc: "What we've done over the years." },
+      { title: "Team Members", href: "/about-us#team-members", desc: "Mentors + Students" },
+      { title: "Sponsors", href: "/about-us#sponsors", desc: "Who supports us?" },
     ],
   },
   {
     label: "Getting Involved",
     items: [
-      { title: "Joining The Club", href: "/new-members", desc: "For any HHS students looking to join the Herndon Robotics Club and grow their STEM expertise." },
-      { title: "Mentorship", href: "/new-mentors", desc: "Become a mentor for Herndon Robotics and help guide the next generation." },
-      { title: "Plan Outreach", href: "/plan-outreach", desc: "Do you want us to show off our robots at one of your events?" },
-      { title: "Sponsor Us", href: "/new-sponsor", desc: "Support our team through monetary or other means." },
+      { title: "Joining The Club", href: "/getting-involved#new-member", desc: "For any HHS students looking to join the Herndon Robotics Club and grow their STEM expertise." },
+      { title: "Mentorship", href: "/getting-involved#new-mentors", desc: "Become a mentor for Herndon Robotics and help guide the next generation." },
+      { title: "Plan Outreach", href: "/getting-involved#plan-outreach", desc: "Do you want us to show off our robots at one of your events?" },
+      { title: "Sponsor Us", href: "/getting-involved#new-sponsor", desc: "Support our team through monetary or other means." },
     ],
   },
   {
     label: "Current Members",
     items: [
-      { title: "Meetings/Events", href: "/calendar", desc: "What events do we have coming up? When are meetings? Do we have a meeting today?" },
-      { title: "Forms", href: "/forms", desc: "Forms for field trips, emergency care, and instructions on how to join our FIRST team." },
-      { title: "Training Materials", href: "/resources", desc: "Want to grow your skills? look here." },
+      { title: "Meetings/Events", href: "/current-member#calendar", desc: "What events do we have coming up? When are meetings? Do we have a meeting today?" },
+      { title: "Forms", href: "/current-member#forms", desc: "Forms for field trips, emergency care, and instructions on how to join our FIRST team." },
+      { title: "Training Materials", href: "/current-member#resources", desc: "Want to grow your skills? look here." },
     ],
   },
 ];
@@ -43,13 +43,13 @@ const sections = [
   <div class="flex flex-row gap-4 w-min">
     <h1 class="text-5xl content-center font-bold w-max tracking-tighter text-center">Epsilon<br>Delta</h1>
     
-    <img src={withBase("logo.png")} class="h-24 w-auto object-contain"></img>
+    <img src={withBase("logo.png")} class="h-24 w-auto object-contain">
     
-    <div class="grid grid-cols-2 h-full grid-rows-2 aspect-square" id="socials">
+    <div class="grid grid-cols-3 h-full grid-rows-2 aspect-3/2 gap-1" id="socials">
       {social_links.map((social) => (
         <a 
           href={social.link}
-          class="flex items-center justify-center bg-foreground m-0.5"
+          class="flex items-center justify-center bg-foreground m-0.5 aspect-square"
           style={
             `mask-image: url('${social.social}');
             mask-size: contain;
@@ -94,9 +94,9 @@ const sections = [
           >
             {section.items.map((item) => (
               <li>
-                <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300">
+                <a href={withBase(item.href)} class="group block px-3 py-2 hover:bg-primary hover:text-accent-foreground transition-all duration-300">
                   <div class="text-base font-medium">{item.title}</div>
-                  <p class="text-base text-muted-foreground group-hover:text-accent-foreground">{item.desc}</p>
+                  <p class="text-base text-muted-foreground group-hover:text-accent-foreground font-sans">{item.desc}</p>
                 </a>
               </li>
             ))}

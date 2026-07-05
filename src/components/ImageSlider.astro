@@ -18,7 +18,7 @@ const { images } = Astro.props;
     transition: "slide", // '' for no transition, 'fade', 'slide', 'blur-sm'
     loop: true,
     autoplay: true,
-    blur:true,
+    blur: true,
     autoplayDuration: 5000,
     autoplayProgressBar: false,
 
@@ -153,7 +153,10 @@ const { images } = Astro.props;
     },
   }));
 </script>
-<div x-data={`imageArray(` +JSON.stringify(images)+ ')'} class="relative mx-auto w-full max-w-full">
+<div
+  x-data={`imageArray(` + JSON.stringify(images) + ")"}
+  class="relative mx-auto w-full max-w-full"
+>
   <!-- Image Slider Container -->
   <div
     class="relative overflow-hidden focus:outline-hidden focus-visible:ring-4 focus-visible:ring-teal-400/60"
@@ -163,7 +166,7 @@ const { images } = Astro.props;
   >
     <!-- Images -->
     <div
-      class="aspect-16/9"
+      class="aspect-video"
       role="region"
       aria-roledescription="carousel"
       aria-label="Image Slider"
@@ -200,7 +203,7 @@ const { images } = Astro.props;
       x-show="arrowsNavigation && !(!loop && currentIndex === 0)"
       x-on:click="previous('button')"
       type="button"
-      class="group absolute -start-1 top-1/2 z-10 flex -translate-y-1/2 items-center rounded-e-md bg-zinc-900/60 py-5 ps-3 pe-2 text-white backdrop-blur-xs transition duration-150 ease-out hover:start-0 hover:bg-zinc-900/90 active:bg-zinc-900/75"
+      class="group absolute -inset-s-1 top-1/2 z-10 flex -translate-y-1/2 items-center rounded-e-md bg-zinc-900/60 py-5 ps-3 pe-2 text-white backdrop-blur-xs transition duration-150 ease-out hover:inset-s-0 hover:bg-zinc-900/90 active:bg-zinc-900/75"
       aria-label="Previous Image Slide"
     >
       <svg
@@ -224,7 +227,7 @@ const { images } = Astro.props;
       x-show="arrowsNavigation && !(!loop && currentIndex === images.length - 1)"
       x-on:click="next('button')"
       type="button"
-      class="group absolute -end-1 top-1/2 z-10 flex -translate-y-1/2 items-center rounded-s-md bg-zinc-900/60 py-5 ps-2 pe-3 text-white backdrop-blur-xs transition duration-150 ease-out hover:end-0 hover:bg-zinc-900/90 active:bg-zinc-900/75"
+      class="group absolute -inset-e-1 top-1/2 z-10 flex -translate-y-1/2 items-center rounded-s-md bg-zinc-900/60 py-5 ps-2 pe-3 text-white backdrop-blur-xs transition duration-150 ease-out hover:inset-e-0 hover:bg-zinc-900/90 active:bg-zinc-900/75"
       aria-label="Next Image Slide"
     >
       <svg
@@ -284,7 +287,7 @@ const { images } = Astro.props;
   <!-- END Dots Navigation -->
 
   <!-- Content -->
-   <slot></slot>
+  <slot />
   <!-- END Content -->
 </div>
 <!-- END Image Slider: In The Background, Behind Content -->

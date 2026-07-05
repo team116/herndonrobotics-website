@@ -3,24 +3,30 @@ import { social_links } from "../utils/socials";
 ---
 
 <div
-  class="flex flex-row w-full h-24 bg-secondary px-10 font-geist text-gray-500 justify-between"
+  class="flex flex-row w-full h-24 bg-muted px-10 font-geist text-gray-500 justify-between"
 >
-  <div class="content-center">
+  <div class="content-center text-lg">
     © {new Date().getFullYear()} Herndon Robotics | Epsilon Delta | FRC 116 | FTC
     519
   </div>
-  <div class="flex flex-row items-center h-full aspect-square g-2" id="socials">
-      {social_links.map((social) => (
-        <a 
+  <div
+    class="flex flex-row items-center h-full aspect-square g-2 text-2xl"
+    id="socials"
+  >
+    {
+      social_links.map((social) => (
+        <a
           href={social.link}
-          class="flex items-center justify-center bg-foreground m-0.5 h-[1rem] aspect-square"
-          style={
-            `mask-image: url('${social.social}');
+          class="flex items-center justify-center bg-foreground m-0.5 h-4 aspect-square"
+          style={`mask-image: url('${social.social}');
             mask-size: contain;
             mask-repeat: no-repeat;
-            mask-position: center;`
-          }></a>
-      ))}
-    <a class="mx-2" href="https://github.com/team116/herndonrobotics-website">source</a>
+            mask-position: center;`}
+        />
+      ))
+    }
+    <a class="mx-2" href="https://github.com/team116/herndonrobotics-website"
+      >source</a
+    >
   </div>
 </div>

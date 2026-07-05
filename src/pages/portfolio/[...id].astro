@@ -1,0 +1,96 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const portfolio = await getCollection("portfolio");
+  return portfolio.map((entry) => ({
+    params: { id: entry.id },
+  }));
+}) satisfies GetStaticPaths;
+
+const portfolio = await getCollection("portfolio");
+const { id } = Astro.params;
+const entry = portfolio.find((entry) => entry.id === id);
+const { Content } = await render(entry);
+const { data } = entry;
+---
+
+<Layout title={data.robot_name}>
+  <div class="pb-16 h-full">
+    <div
+      class="border border-accent rounded-2xl p-8 m-8 bg-secondary flex flex-row transition-all h-full gap-8"
+    >
+      <Image
+        src={data.img}
+        alt={data.robot_name}
+        class="self-center h-full aspect-auto w-auto"
+      />
+
+      <div class="flex flex-col flex-1 justify-center p-16 border border-accent rounded-2xl bg-background">
+        <div class="flex flex-col gap-1 items-center">
+          <p class="text-5xl font-semibold font-audiowide">{data.robot_name}</p>
+          <p class="text-shadow-md text-primary text-3xl">
+            {data.competition_type} &middot; {data.year} &middot; {data.title}
+          </p>
+        </div>
+        <div class="flex flex-col gap-1 flex-1 justify-center w-[80%] self-center">
+          <p class="text-3xl font-semibold font-audiowide">
+            {"Weight: " + data.weight}
+          </p>
+          <p class="text-3xl font-semibold font-audiowide">
+            {"Dimensions: " + data.dimensions}
+          </p>
+          <p class="text-3xl font-semibold font-audiowide">
+            Notable Features:
+            <ul>
+              {
+                data.notable_features.map((feature: string) => (
+                  <li class="text-3xl font-semibold font-audiowide">
+                    &emsp;- {feature}
+                  </li>
+                ))
+              }
+            </ul>
+          </p>
+
+          <div class="m-4"></div>
+
+          <div class="content text-3xl font-sans text-foreground">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content :global(table) {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .content :global(th),
+  .content :global(td) {
+    border: 1px solid;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  .content :global(th) {
+    font-weight: 600;
+  }
+
+  .content :global(strong) {
+    font-family: var(--font-audiowide);
+  }
+</style>
+
+<script>
+  document.body.style.height = "100dvh";
+</script>
