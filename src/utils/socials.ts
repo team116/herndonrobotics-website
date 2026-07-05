@@ -24,6 +24,6 @@ export const social_links = [
     link: "https://www.youtube.com/@herndonrobotics9787",
   },
 ].map((social) => ({
-  social: "social/" + social.social + ".svg",
+  social: "/social/" + social.social + ".svg",
   link: social.link,
 }));

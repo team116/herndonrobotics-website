@@ -80,8 +80,32 @@ const portfolio = await getCollection("portfolio");
         <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
           <i>Portfolio</i>
         </h2>
-        <div class="grid grid-cols-5 gap-8">
-          {portfolio.map((item) => <Portfolio entry={item} />)}
+        <div class="grid grid-cols-4 gap-8">
+          {
+            portfolio
+              .sort((a, b) => {
+                if (a.data.year > b.data.year) {
+                  return 1;
+                } else if (a.data.year < b.data.year) {
+                  return -1;
+                } else if (
+                  a.data.competition_type == "FRC" &&
+                  b.data.competition_type == "FTC"
+                ) {
+                  return 1;
+                } else if (
+                  a.data.competition_type == "FTC" &&
+                  b.data.competition_type == "FRC"
+                ) {
+                  return -1;
+                } else {
+                  return 0;
+                }
+              })
+              .slice(-4)
+              .reverse()
+              .map((item) => <Portfolio entry={item} />)
+          }
         </div>
       </div>
     </section>

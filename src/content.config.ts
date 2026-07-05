@@ -10,6 +10,9 @@ const portfolio = defineCollection({
     year: z.coerce.number(),
     robot_name: z.string(),
     img: image(),
+    weight: z.string(),
+    dimensions: z.string(),
+    notable_features: z.array(z.string()),
   }),
 });
 

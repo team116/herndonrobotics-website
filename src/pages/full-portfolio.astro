@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Portfolio from "../components/Portfolio.astro";
+
+const portfolio = await getCollection("portfolio");
+---
+
+<Layout title="Who Are We?">
+  <div class="flex flex-col flex-1 justify-center p-8">
+    <div class="flex flex-row flex-1 justify-between items-center">
+      <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+        <i>Portfolio</i>
+      </h2>
+      {portfolio.length > 4 && <a>see more →</a>}
+    </div>
+    <div class="grid grid-cols-4 gap-8">
+      {
+        portfolio
+          .sort((a, b) => {
+            if (a.data.year > b.data.year) {
+              return 1;
+            } else if (a.data.year < b.data.year) {
+              return -1;
+            } else if (
+              a.data.competition_type == "FRC" &&
+              b.data.competition_type == "FTC"
+            ) {
+              return 1;
+            } else if (
+              a.data.competition_type == "FTC" &&
+              b.data.competition_type == "FRC"
+            ) {
+              return -1;
+            } else {
+              return 0;
+            }
+          })
+          .reverse()
+          .map((item) => <Portfolio entry={item} />)
+      }
+    </div>
+  </div>
+</Layout>

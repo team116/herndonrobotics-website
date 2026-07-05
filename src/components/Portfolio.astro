@@ -9,38 +9,22 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { data } = entry;
+const { data, id } = entry;
 ---
 
-<div class="border border-accent rounded-2xl p-4 bg-secondary">
-  <Image src={data.img} alt={data.robot_name} />
-  <div class="flex flex-col gap-1 items-center">
-    <h3 class="text-lg font-semibold font-audiowide">{data.robot_name}</h3>
-    <p class="text-shadow-md text-primary">
-      {data.competition_type} &middot; {data.year} &middot; {data.title}
-    </p>
-  </div>
+<a href={"/portfolio/" + id } class="group">
+  <div class="border border-accent rounded-2xl p-4 bg-secondary flex flex-col transition-all group-hover:bg-background group-hover:p-6 ">
+    <Image src={data.img} alt={data.robot_name} class="self-center w-full" />
+    <div class="flex flex-col gap-1 items-center">
+      <h3 class="text-2xl font-semibold font-audiowide">{data.robot_name}</h3>
+      <p class="text-shadow-md text-primary text-lg">
+        {data.competition_type} &middot; {data.year} &middot; {data.title}
+      </p>
+    </div>
 
-  <div class="content">
+    <!-- <div class="content">
     <Content />
+  </div> -->
   </div>
-</div>
+</a>
 
-<style>
-  .content :global(table) {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .content :global(th),
-  .content :global(td) {
-    border: 1px solid;
-    padding: 0.5rem;
-    text-align: left;
-  }
-
-  .content :global(th) {
-    font-weight: 600;
-  }
-</style>
