@@ -2,9 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import Portfolio from "../components/Portfolio.astro";
-import { Image } from "astro:assets";
-
-import placeholder_img from "../../public/logo.png";
 
 const portfolio = await getCollection("portfolio");
 ---
@@ -84,7 +81,7 @@ const portfolio = await getCollection("portfolio");
           <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
             <i>Portfolio</i>
           </h2>
-          {portfolio.length > 4 && <a href="/portfolio" class="text-xl">see more →</a>}
+          {portfolio.length > 4 && <a href="/full-portfolio">see more →</a>}
         </div>
         <div class="grid grid-cols-4 gap-8">
           {
@@ -115,52 +112,5 @@ const portfolio = await getCollection("portfolio");
         </div>
       </div>
     </section>
-
-    <hr />
-
-    <section id="team members">
-      <div class="flex flex-col flex-1 justify-center">
-        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
-          <i>Team Members</i>
-        </h2>
-        <div class="grid grid-cols-2 gap-8">
-          <!-- Mentors -->
-          <a href = "/404">
-            <div
-              class="border border-accent rounded-2xl p-8 bg-secondary flex flex-row transition-all h-full gap-4 aspect-2/1"
-            >
-              <Image
-                src={placeholder_img}
-                alt="Mentor"
-                class="self-center h-full aspect-auto w-auto rounded-2xl"
-              />
-
-              <div
-                class="flex flex-col flex-1 justify-center p-4 border border-accent rounded-2xl bg-background"
-              >
-                <p
-                  class="text-5xl font-semibold font-audiowide w-full text-center text-primary"
-                >
-                  Mentors
-                </p>
-                <div
-                  class="flex flex-col gap-1 flex-1 justify-center self-center"
-                >
-                  <div class="text-xl text-foreground">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Curabitur non viverra dui. Pellentesque dapibus magna
-                      massa, id convallis felis bibendum at.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <div class="h-4"></div>
   </div>
 </Layout>
