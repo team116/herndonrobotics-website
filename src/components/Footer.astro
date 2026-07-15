@@ -5,7 +5,7 @@ import { social_links } from "../utils/socials";
 <div
   class="flex flex-row w-full h-24 bg-muted px-10 font-geist text-gray-500 justify-between"
 >
-  <div class="content-center text-lg">
+  <div class="content-center text-2xl">
     © {new Date().getFullYear()} Herndon Robotics | Epsilon Delta | FRC 116 | FTC
     519
   </div>
@@ -17,7 +17,7 @@ import { social_links } from "../utils/socials";
       social_links.map((social) => (
         <a
           href={social.link}
-          class="flex items-center justify-center bg-foreground m-0.5 h-4 aspect-square"
+          class="flex items-center justify-center bg-foreground mx-0.5 h-4 aspect-square"
           style={`mask-image: url('${social.social}');
             mask-size: contain;
             mask-repeat: no-repeat;

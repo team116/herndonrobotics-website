@@ -1,0 +1,1 @@
+export const student_roles = ["Admin", "FRC", "FTC", "Shop", "Outreach", "Programming", "Build", "Media", "Member"]

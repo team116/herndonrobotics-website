@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import ImageSlider from "../components/ImageSlider.astro";
 import Layout from "../layouts/Layout.astro";
 import RobotImage from "/src/assets/generic/FRC_robot_homepage.jpg";
@@ -18,11 +18,15 @@ const srcs = Object.values(images).map((image) => image.default.src);
       class="absolute inset-0 z-1 flex flex-col justify-center bg-red-500/50 text-white"
     >
       <div class="p-2 text-center">
-        <h2 class="text-lg font-bold sm:text-3xl">
-          From small changes come big differences.
+        <h2 class="text-9xl font-bold">
+          From small changes<br />come big differences.
         </h2>
-        <h3 class="mt-1.5 font-medium text-2xl font-audiowide">
+        <h3 class="mt-1.5 font-medium text-6xl font-audiowide">
           <i>Epsilon Delta</i>
+        </h3>
+
+        <h3 class="mt-16 font-medium text-2xl font-audiowide">
+          <i>Students chose this name to represent the endless small changes needed for improvement</i>
         </h3>
       </div>
     </div>
@@ -37,10 +41,11 @@ const srcs = Object.values(images).map((image) => image.default.src);
     />
 
     <div class="flex flex-col flex-1 justify-center">
-      
-      <h2 class="text-8xl font-audiowide mb-8"><i>About Us</i></h2>
+      <h2 class="text-8xl font-audiowide mb-8 text-primary-foreground">
+        <i>About Us</i>
+      </h2>
 
-      <div class="text-lg text-primary-foreground mb-16">
+      <div class="text-2xl text-foreground mb-16">
         <p>
           Epsilon Delta, team 116, is a Herndon High School robotics team,
           dedicated to inspiring the next generation of engineers and
@@ -53,30 +58,37 @@ const srcs = Object.values(images).map((image) => image.default.src);
       </div>
 
       <div class="flex flex-row w-full justify-center gap-8 mb-8">
-        {[
-          {
-            top_text: "30+",
-            text: "Years of History"
-          },
-          {
-            top_text: "50+",
-            text: "Inspired Members"
-          },
-          {
-            top_text: "1,000+",
-            text: "Lives Changed"
-          },
-        ].map((element) => (
-          <div class="flex flex-col justify-center text-center font-audiowide">
-            <h2 class="text-6xl">{element.top_text}</h2>
-            <h4 class="text-xl"><i>{element.text}</i></h4>
-          </div>
-        ))}
+        {
+          [
+            {
+              top_text: "30+",
+              text: "Years of History",
+            },
+            {
+              top_text: "50+",
+              text: "Inspired Members",
+            },
+            {
+              top_text: "1,000+",
+              text: "Lives Changed",
+            },
+          ].map((element) => (
+            <div class="flex flex-col justify-center text-center font-audiowide text-primary">
+              <h2 class="text-6xl">{element.top_text}</h2>
+              <h4 class="text-xl text-foreground">
+                <i>{element.text}</i>
+              </h4>
+            </div>
+          ))
+        }
       </div>
-      
-      <div class="self-center text-2xl px-5 py-2 rounded-full bg-accent font-audiowide">
-        <a href="/about-us">Learn More</a>
-      </div>
+      <a href="/about-us" class="self-center">
+        <div
+          class="self-center text-2xl px-5 py-2 rounded-full bg-accent font-audiowide transition w-fit hover:bg-primary"
+        >
+          Learn More
+        </div>
+      </a>
     </div>
   </div>
 </Layout>

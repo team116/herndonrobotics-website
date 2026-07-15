@@ -31,14 +31,14 @@
 
 :root {
   --background: oklch(0.999 0.01 110.1);
-  --foreground: oklch(0.149 0.01 110.1);
+  --foreground: oklch(0.249 0.01 110.1);
   --primary: oklch(0.478 0.578 31.1);
   --primary-foreground: oklch(0.928 0.578 31.1);
   --secondary: oklch(0.975 0.01 110.1);
   --secondary-foreground: oklch(0.249 0.01 110.1);
   --muted: oklch(87.358% 0.01209 106.78);
   --muted-foreground: oklch(0.549 0.01 110.1);
-  --accent: oklch(0.361 0.402 26.7);
+  --accent: oklch(0.400 0.402 26.7);
   --accent-foreground: oklch(0.249 0.01 110.1);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.899 0.01 110.1);
