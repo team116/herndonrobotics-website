@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+const mentors = await getCollection("mentors");
+---
+
+<Layout title="Mentors">
+  <div
+    class="border-l-4 border-r-4 border-accent rounded-4xl p-8 bg-secondary w-[90%] m-auto my-8"
+  >
+    <h2 class="text-8xl font-audiowide mb-4 text-foreground m-auto w-fit">
+      <i>Mentors</i>
+    </h2>
+    <div
+      class="flex flex-col w-full bg-background border-2 rounded-3xl border-primary px-8 py-4 gap-16"
+    >
+      {
+        mentors.entries().map(([i, mentor]) => (
+          <div class="flex flex-col flex-1 gap-y-2">
+            <h1 class="text-6xl font-semibold text-center">
+              {mentor.data.name}
+            </h1>
+
+            <div class={"flex flex-row gap-x-8 items-stretch justify-between px-[10%] " + ((i%2===0)?" [direction:rtl]":"")}>
+              <div class="relative aspect-square h-auto shrink-0 justify-self-center">
+                <Image
+                  src={mentor.data.image}
+                  alt="hello world"
+                  class="rounded-full absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+
+              <div class={"p-2 grid grid-cols-[auto_1fr] gap-y-8 gap-x-4 items-center h-fit whitespace-nowrap "  + ((i%2===0)?" [direction:ltr]":"[direction:rtl]")}>
+                <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
+                  Name
+                </h1>
+                <div class="text-4xl">{mentor.data.name}</div>
+
+                <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
+                  Year Joined
+                </h1>
+                <div class="text-4xl">{mentor.data.year_joined}</div>
+
+                <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
+                  Career
+                </h1>
+                <div class="text-4xl">{mentor.data.career}</div>
+
+                <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
+                  Mentor For
+                </h1>
+                <div class="text-4xl">{mentor.data.mentor_for}</div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

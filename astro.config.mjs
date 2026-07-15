@@ -10,5 +10,11 @@ export default defineConfig({
   },
   integrations: [mdx()],
   site: 'https://www.herndonrobotics.org/',
-  base: ''
+  base: '',
+  redirects: {
+    "/blog": {
+      status: 302,
+      destination: "https://team116.org/"
+    },
+  }
 });

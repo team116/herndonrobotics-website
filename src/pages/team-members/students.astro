@@ -1,0 +1,238 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { student_roles } from "../../utils/student_roles";
+
+const students = await getCollection("students");
+const years = students.map((s) => s.data.year);
+const min_year = Math.min(...years);
+const max_year = Math.max(...years);
+---
+
+<script>
+  import Alpine from "alpinejs";
+  import { student_roles } from "../../utils/student_roles";
+  import type { InferEntrySchema } from "astro:content";
+
+  type Pair = [number, number];
+
+  Alpine.data("student_search", () => {
+    const root = document.getElementById("search-root")!;
+    const min_year = Number(root.dataset.minYear);
+    const max_year = Number(root.dataset.maxYear);
+
+    return {
+      name_search: "",
+      captains: false, //should only show captains, but doesnt work
+      roles: student_roles.map(() => true) as boolean[],
+      years: [min_year, max_year] as Pair,
+
+      filtered(data: InferEntrySchema<"students">) {
+        if (this.captains && !data.captain) {
+          return false;
+        }
+        if (!data.name.toLowerCase().includes(this.name_search.toLowerCase())) {
+          return false;
+        }
+        if (!this.roles[student_roles.indexOf(data.role)]) {
+          return false;
+        }
+        if (data.year < this.years[0] || data.year > this.years[1]) {
+          return false;
+        }
+
+        return true;
+      },
+
+      enable_all_roles() {
+        this.roles = student_roles.map(() => true);
+      },
+
+      disable_all_roles() {
+        this.roles = student_roles.map(() => false);
+      },
+
+      get_all_state() {
+        let count: number = this.roles.filter((role) => role).length;
+        if (count === this.roles.length) {
+          return "on";
+        } else if (count === 0) {
+          return "off";
+        }
+        return "intermediate";
+      },
+
+      all_roles: {
+        [":checked"](){
+          return this.get_all_state() === "on";
+        },
+
+        [":intermediate"](){
+          let inp = this.$el as HTMLInputElement;
+          inp.indeterminate = this.get_all_state() === "intermediate";
+        },
+
+        ["@change"]() {
+          let inp = this.$el as HTMLInputElement;
+
+          if (inp.indeterminate === true || inp.checked === false) {
+            this.disable_all_roles();
+          } else {
+            this.enable_all_roles();
+          }
+        },
+      },
+    };
+  });
+</script>
+
+<Layout title="Students">
+  <div class="m-8">
+    <div
+      class="grid grid-cols-[1fr_5fr]"
+      x-data="student_search"
+      data-min-year={min_year}
+      data-max-year={max_year}
+      id="search-root"
+    >
+      <!-- search -->
+      <div class="bg-secondary rounded-2xl p-6 h-fit flex flex-col gap-6">
+        <!-- name search -->
+        <div class="flex flex-col gap-2">
+          <label
+            for="name_search"
+            class="font-audiowide text-lg text-foreground"
+          >
+            Name
+          </label>
+          <input
+            id="name_search"
+            type="text"
+            x-model="name_search"
+            placeholder="Search by name..."
+            class="rounded-lg border-2 border-accent bg-background px-3 py-2 text-foreground"
+          />
+        </div>
+
+        <!-- captains only -->
+        <div class="flex items-center gap-2">
+          <input
+            id="captains"
+            type="checkbox"
+            x-model="captains"
+            class="w-5 h-5 accent-primary"
+          />
+          <label for="captains" class="font-audiowide text-foreground">
+            Captains only
+          </label>
+        </div>
+
+        <!-- year range -->
+        <div class="flex flex-col gap-2">
+          <label class="font-audiowide text-lg text-foreground">
+            Year: <span x-text="years[0]"></span> &ndash; <span
+              x-text="years[1]"></span>
+          </label>
+          <div class="flex items-center gap-2">
+            <input
+              type="number"
+              x-model.number="years[0]"
+              min={min_year}
+              max={max_year}
+              class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
+            />
+            <span class="text-foreground">to</span>
+            <input
+              type="number"
+              x-model.number="years[1]"
+              min={min_year}
+              max={max_year}
+              class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
+            />
+          </div>
+        </div>
+
+        <!-- roles -->
+        <div class="flex flex-col gap-2">
+          <span class="font-audiowide text-lg text-foreground">Roles</span>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <input
+                id=`role_all`
+                type="checkbox"
+                checked
+                x-bind="all_roles"
+                class="w-5 h-5 accent-primary"
+              />
+              <label for=`role_all` class="text-foreground"> All </label>
+            </div>
+            {
+              student_roles.map((role, i) => (
+                <div class="flex items-center gap-2">
+                  <input
+                    id={`role_${i}`}
+                    type="checkbox"
+                    x-model={`roles[${i}]`}
+                    class="w-5 h-5 accent-primary"
+                  />
+                  <label for={`role_${i}`} class="text-foreground">
+                    {role}
+                  </label>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <!-- students -->
+      <div>
+        <h2 class="text-8xl font-audiowide mb-4 text-foreground m-auto w-fit">
+          <i>Students</i>
+        </h2>
+        <div class="flex flex-wrap gap-4 justify-center">
+          {
+            students
+              .sort((a, b) => {
+                if (a.data.year != b.data.year) {
+                  return a.data.year > b.data.year ? 1 : -1;
+                }
+                if (a.data.captain != b.data.captain) {
+                  return a.data.captain ? 1 : -1;
+                }
+                if (a.data.role != b.data.role) {
+                  return student_roles.indexOf(a.data.role) >
+                    student_roles.indexOf(b.data.role)
+                    ? 1
+                    : -1;
+                }
+                if (a.data.name != b.data.name) {
+                  return a.data.name > b.data.name ? 1 : -1;
+                }
+                return 0;
+              })
+              .reverse()
+              .map((student) => (
+                <div
+                  class:list={[
+                    "bg-secondary rounded-2xl p-2 text-3xl w-fit",
+                    student.data.captain
+                      ? "border-primary border-4"
+                      : "border-accent border-3",
+                  ]}
+                  data-student={JSON.stringify(student.data)}
+                  x-show="filtered(JSON.parse($el.dataset.student))"
+                >
+                  <div class="mx-auto text-center font-audiowide">
+                    {(student.data.captain ? "Capt. " : "") + student.data.name}
+                  </div>
+                  <div class="mx-auto text-center font-audiowide">
+                    {student.data.year} &middot; {student.data.role}
+                  </div>
+                </div>
+              ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
