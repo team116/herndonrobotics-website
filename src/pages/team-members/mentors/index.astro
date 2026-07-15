@@ -1,0 +1,7 @@
+---
+import { getCollection } from "astro:content";
+
+const mentors = await getCollection("mentors");
+
+---
+{mentors.map((mentor) => (<div>{mentor.data.name }</div>))}

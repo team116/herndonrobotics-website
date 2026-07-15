@@ -16,4 +16,15 @@ const portfolio = defineCollection({
   }),
 });
 
-export const collections = { portfolio };
+const mentors = defineCollection({
+  loader: glob({ pattern: "*.json", base: "./src/assets/team-members/mentors" }),
+  schema: ({image}) => z.object({
+    name: z.string(),
+    year_joined: z.number(),
+    career: z.string(),
+    mentor_for: z.string(),
+    image: image(),
+  }),
+});
+
+export const collections = { portfolio, mentors };
