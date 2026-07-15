@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { student_roles } from "./utils/student_roles";
 
 const portfolio = defineCollection({
   loader: glob({ pattern: "*.mdx", base: "./src/assets/portfolio" }),
@@ -27,4 +28,14 @@ const mentors = defineCollection({
   }),
 });
 
-export const collections = { portfolio, mentors };
+const students = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/assets/team-members/students" }),
+  schema: z.object({
+    name: z.string(),
+    year: z.number(),
+    role: z.enum(student_roles),
+    captain: z.boolean(),
+  }),
+});
+
+export const collections = { portfolio, mentors, students };
