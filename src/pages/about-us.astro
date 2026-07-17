@@ -7,6 +7,14 @@ import { Image } from "astro:assets";
 import placeholder_img from "../../public/logo.png";
 
 const portfolio = await getCollection("portfolio");
+
+const sponsors = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/sponsors/*.{png,JPG,jpg,jpeg,webp,svg}",
+  { eager: true },
+);
+console.log(Object.values(sponsors).map((image)=>{
+            return JSON.stringify(image)
+          }));
 ---
 
 <Layout title="Who Are We?">
@@ -192,10 +200,19 @@ const portfolio = await getCollection("portfolio");
       </div>
     </section>
 
-
     <hr />
 
-
-    <div class="h-4"></div>
+    <section id="sponsors">
+      <div class="flex flex-col flex-1 justify-center">
+        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+          <i>Sponsors</i>
+        </h2>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+          {Object.values(sponsors).map((image)=>(
+            <Image src={image.default} alt={"sponsor"} class="aspect-square w-full"></Image>
+          ))}
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>
