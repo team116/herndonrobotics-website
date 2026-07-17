@@ -133,12 +133,12 @@ const portfolio = await getCollection("portfolio");
           <!-- Mentors -->
           <a href="/team-members/mentors">
             <div
-              class="border border-accent rounded-2xl p-8 bg-secondary flex flex-row transition-all h-full gap-4 aspect-2/1 hover:border-4"
+              class="border border-accent rounded-2xl p-8 bg-secondary w-full transition-all hover:border-4 grid grid-cols-2 gap-4"
             >
               <Image
                 src={placeholder_img}
                 alt="Mentor"
-                class="self-center h-full aspect-auto w-auto rounded-2xl"
+                class="self-center aspect-square w-auto rounded-2xl"
               />
 
               <div
@@ -162,12 +162,12 @@ const portfolio = await getCollection("portfolio");
           <!-- students -->
           <a href="/team-members/students">
             <div
-              class="border border-accent rounded-2xl p-8 bg-secondary flex flex-row transition-all h-full gap-4 aspect-2/1 hover:border-4"
+              class="border border-accent rounded-2xl p-8 bg-secondary w-full transition-all hover:border-4 grid grid-cols-2 gap-4"
             >
               <Image
                 src={placeholder_img}
                 alt="Student"
-                class="self-center h-full aspect-auto w-auto rounded-2xl"
+                class="self-center aspect-square w-auto rounded-2xl"
               />
 
               <div
@@ -191,6 +191,10 @@ const portfolio = await getCollection("portfolio");
         </div>
       </div>
     </section>
+
+
+    <hr />
+
 
     <div class="h-4"></div>
   </div>
