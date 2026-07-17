@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import Portfolio from "../components/Portfolio.astro";
+import TeamCard from "../components/TeamCard.astro";
 import { Image } from "astro:assets";
 
 import placeholder_img from "../../public/logo.png";
@@ -12,9 +13,6 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/sponsors/*.{png,JPG,jpg,jpeg,webp,svg}",
   { eager: true },
 );
-console.log(Object.values(sponsors).map((image)=>{
-            return JSON.stringify(image)
-          }));
 ---
 
 <Layout title="Who Are We?">
@@ -138,64 +136,21 @@ console.log(Object.values(sponsors).map((image)=>{
           <i>Team Members</i>
         </h2>
         <div class="grid grid-cols-2 gap-8">
-          <!-- Mentors -->
-          <a href="/team-members/mentors">
-            <div
-              class="border border-accent rounded-2xl p-8 bg-secondary w-full transition-all hover:border-4 grid grid-cols-2 gap-4"
-            >
-              <Image
-                src={placeholder_img}
-                alt="Mentor"
-                class="self-center aspect-square w-auto rounded-2xl"
-              />
+          <TeamCard
+  href="/team-members/mentors"
+  image={placeholder_img}
+  imageAlt="Mentor"
+  title="Mentors"
+  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
+/>
 
-              <div
-                class="flex flex-col flex-1 p-4 py-8 border border-accent rounded-2xl bg-background gap-4"
-              >
-                <p
-                  class="text-5xl font-semibold font-audiowide w-full text-center text-primary"
-                >
-                  Mentors
-                </p>
-                <div class="text-2xl text-foreground">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur non viverra dui. Pellentesque dapibus magna massa,
-                    id convallis felis bibendum at.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </a>
-          <!-- students -->
-          <a href="/team-members/students">
-            <div
-              class="border border-accent rounded-2xl p-8 bg-secondary w-full transition-all hover:border-4 grid grid-cols-2 gap-4"
-            >
-              <Image
-                src={placeholder_img}
-                alt="Student"
-                class="self-center aspect-square w-auto rounded-2xl"
-              />
-
-              <div
-                class="flex flex-col flex-1 p-4 py-8 border border-accent rounded-2xl bg-background gap-4"
-              >
-                <p
-                  class="text-5xl font-semibold font-audiowide w-full text-center text-primary"
-                >
-                  Students
-                </p>
-                <div class="text-2xl text-foreground">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur non viverra dui. Pellentesque dapibus magna massa,
-                    id convallis felis bibendum at.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </a>
+<TeamCard
+  href="/team-members/students"
+  image={placeholder_img}
+  imageAlt="Student"
+  title="Students"
+  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
+/>
         </div>
       </div>
     </section>
