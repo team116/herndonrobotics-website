@@ -1,9 +1,124 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const info = [
+  {
+    id: "new-member",
+    title: "New Member",
+    contact: "example@example.com",
+    instructions: [
+      "Show up to meetings",
+      "Complete shop training",
+      "Join our Slack",
+    ],
+    involvement: "Join us and start building robots and learning STEM!",
+    expectations: [
+      "Learn STEM",
+      "Build Robots",
+      "Grow your skills",
+      "Meet like-minded people",
+    ],
+  },
+  {
+    id: "new-mentors",
+    title: "New Mentor",
+    contact: "example@example.com",
+    instructions: ["no clue"],
+    involvement: "Guide the next generation and experience their growth!",
+    expectations: ["Teach Students", "Advise Members", "etc..."],
+  },
+
+  {
+    id: "plan-outreach",
+    title: "Outreach",
+    contact: "example@example.com",
+    instructions: ["no clue"],
+    involvement: "Lorem ipsum",
+    expectations: ["can't wait for someone else to fill this in"],
+  },
+
+  {
+    id: "new-sponsor",
+    title: "Sponsor",
+    contact: "example@example.com",
+    instructions: ["no clue"],
+    involvement: "Lorem ipsum",
+    expectations: ["can't wait for someone else to fill this in"],
+  },
+];
 ---
-<Layout title="Getting Involved">
-  <div class="max-w-3xl mx-auto px-4 py-16">
-    <h1 class="text-5xl font-bold mb-4">Getting Involved</h1>
-    <p class="text-muted-foreground text-lg">Page coming soon.</p>
+
+<Layout title="Getting Involved" single_screen={true}>
+  <div
+    class="m-8 flex-1 flex flex-col gap-4"
+    x-data={`{active: window.location.hash.slice(1) || '${info[0].id}'}`}
+    x-init={`window.addEventListener('hashchange', () => { active = window.location.hash.slice(1) || '${info[0].id}' })`}
+  >
+    <div class="flex justify-center gap-4 font-audiowide text-5xl">
+      {
+        info
+          .map((card) => (
+            <a href={`#${card.id}`}>
+              <div
+                class="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                x-bind:class={`{'after:scale-x-100': active=='${card.id}'}`}
+              >
+                {card.title}
+              </div>
+            </a>
+          ))
+          .flatMap((item, index, array) =>
+            index < array.length - 1 ? [item, <h1>|</h1>] : [item],
+          )
+      }
+    </div>
+    <div
+      class="border border-accent rounded-2xl p-8 bg-secondary flex flex-row transition-all gap-8 flex-1"
+    >
+      {
+        info.map((card) => (
+          <div
+            x-show={`active === '${card.id}'`}
+            x-cloak
+            class="flex flex-col gap-6 flex-1"
+          >
+            <div>
+              <p class="text-6xl">{card.involvement}</p>
+              <br />
+              <p class="mt-2 text-5xl">
+                <strong>Contact:</strong>{" "}
+                <a
+                  href={`mailto:${card.contact}`}
+                  class="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                >
+                  {card.contact}
+                </a>
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-8 gap-y-4 flex-1 items-stretch p-16 h-min">
+              <h3 class="font-audiowide text-primary-foreground mx-auto w-fit text-6xl">
+                How to Join
+              </h3>
+              <h3 class="font-audiowide text-primary-foreground mx-auto w-fit text-6xl">
+                What to Expect
+              </h3>
+
+              <ol class="list-decimal list-inside space-y-2 text-5xl">
+                {card.instructions.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+
+              <ul class="list-decimal list-inside space-y-2 text-5xl">
+                {card.expectations.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </Layout>
