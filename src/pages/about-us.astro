@@ -137,20 +137,20 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
         </h2>
         <div class="grid grid-cols-2 gap-8">
           <TeamCard
-  href="/team-members/mentors"
-  image={placeholder_img}
-  imageAlt="Mentor"
-  title="Mentors"
-  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
-/>
+            href="/team-members/mentors"
+            image={placeholder_img}
+            imageAlt="Mentor"
+            title="Mentors"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
+          />
 
-<TeamCard
-  href="/team-members/students"
-  image={placeholder_img}
-  imageAlt="Student"
-  title="Students"
-  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
-/>
+          <TeamCard
+            href="/team-members/students"
+            image={placeholder_img}
+            imageAlt="Student"
+            title="Students"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non viverra dui. Pellentesque dapibus magna massa, id convallis felis bibendum at."
+          />
         </div>
       </div>
     </section>
@@ -163,9 +163,15 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
           <i>Sponsors</i>
         </h2>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
-          {Object.values(sponsors).map((image)=>(
-            <Image src={image.default} alt={"sponsor"} class="aspect-square w-full"></Image>
-          ))}
+          {
+            Object.values(sponsors).map((image) => (
+              <Image
+                src={image.default}
+                alt={"sponsor"}
+                class="aspect-square w-full"
+              />
+            ))
+          }
         </div>
       </div>
     </section>

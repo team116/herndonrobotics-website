@@ -1,5 +1,17 @@
 ---
+import { render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const training = await Promise.all(
+  (await getCollection("training")).map(async (entry) => ({
+    title: entry.data.title,
+    doc: entry.data.doc_location,
+    content: (await render(entry)).Content,
+  })),
+);
+
+console.log(training);
 ---
 
 <Layout title="Current Member">
@@ -14,6 +26,65 @@ import Layout from "../layouts/Layout.astro";
         src="https://calendar.google.com/calendar/embed?src=c_c5500f600227051e9a84741368561a20b440914798871e717326cab71ee08e0c%40group.calendar.google.com&ctz=America%2FNew_York&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
         style="border: 0"
         class="w-full h-full rounded-2xl aspect-video bg-accent"></iframe>
+    </section>
+
+    <hr />
+
+    <section id="forms">
+      <div class="flex flex-col flex-1 justify-center">
+        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+          <i>Forms</i>
+        </h2>
+      </div>
+      <div class="flex flex-col gap-8">
+        <div
+          class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10"
+        >
+          <p class="font-sans text-8xl font-bold w-fit mx-auto">
+            Emergency Care Form
+          </p>
+          <iframe
+            src="./forms/sample-local-pdf.pdf"
+            class="w-[80%] aspect-11/8 m-auto"></iframe>
+        </div>
+        <div
+          class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10"
+        >
+          <p class="font-sans text-8xl font-bold w-fit mx-auto">
+            Field Trip Form
+          </p>
+          <iframe
+            src="./forms/sample-local-pdf.pdf"
+            class="w-[80%] aspect-11/8 m-auto"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <section id="resources">
+      <div class="flex flex-col flex-1 justify-center">
+        <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
+          <i>Training Resources</i>
+        </h2>
+      </div>
+      <div class="flex flex-col gap-8">
+        {
+          training.map((entry) => (
+            <a href={`/training/${entry.doc}`}>
+              <div class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10 hover:ring-6 hover:ring-primary">
+                <p class="font-sans text-8xl font-bold w-fit mx-auto">
+                  {entry.title}
+                </p>
+
+                <div class="content text-3xl font-sans text-foreground justify-center p-8 border border-accent rounded-2xl bg-background">
+                  <entry.content />
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </section>
   </div>
 </Layout>
