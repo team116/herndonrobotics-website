@@ -76,4 +76,8 @@
   html {
     @apply font-sans;
   }
+
+  [x-cloak] {
+    display: none !important;
+  }
 }

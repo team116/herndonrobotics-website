@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import NavMenu from "../components/NavMenu.astro";
 import "../styles/global.css";
+import "../styles/md.css";
 import { withBase } from "../utils/url";
 
 interface Props {
@@ -38,7 +39,7 @@ const { title, single_screen = false } = Astro.props;
   </head>
   <body class={"flex flex-col min-h-dvh " + (single_screen?"h-dvh":"")}>
     <NavMenu />
-    <main class="flex-1">
+    <main class="flex-1 flex flex-col">
       <slot />
     </main>
     <Footer />
