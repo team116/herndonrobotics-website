@@ -17,7 +17,7 @@
       color-mix(in oklab, var(--color-foreground) 6%, transparent)
     );
   }
-  .content tr:nth-child(even td) {
+  .content tr:nth-child(even) td {
     background: color-mix(in oklab, var(--color-foreground) 3%, transparent);
   }
   .content strong {
