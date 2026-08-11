@@ -81,3 +81,19 @@
     display: none !important;
   }
 }
+
+html {
+  font-size: calc(15/16 * 100%);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: calc(13/16 * 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: calc(10/16 * 100%);
+  }
+}
