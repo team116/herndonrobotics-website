@@ -18,15 +18,11 @@ const srcs = Object.values(images).map((image) => image.default.src);
       class="absolute inset-0 z-1 flex flex-col justify-center bg-red-500/50 text-white"
     >
       <div class="p-2 text-center">
-        <h2 class="text-9xl font-bold">
+        <h2 class="text-5xl md:text-7xl font-bold">
           From small changes<br />come big differences.
         </h2>
-        <h3 class="mt-1.5 font-medium text-6xl font-audiowide">
+        <h3 class="mt-1.5 font-medium text-3xl md:text-5xl font-audiowide">
           <i>Epsilon Delta</i>
-        </h3>
-
-        <h3 class="mt-16 font-medium text-2xl font-audiowide">
-          <i>Students chose this name to represent the endless small changes needed for improvement</i>
         </h3>
       </div>
     </div>
@@ -37,7 +33,7 @@ const srcs = Object.values(images).map((image) => image.default.src);
     <Image
       src={RobotImage}
       alt="FRC Robot"
-      class="w-[50%] aspect-10/9 object-cover object-center flex-1"
+      class="w-[50%] aspect-10/9 object-cover object-center flex-1 hidden lg:block"
     />
 
     <div class="flex flex-col flex-1 justify-center">
