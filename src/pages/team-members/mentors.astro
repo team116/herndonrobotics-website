@@ -23,35 +23,45 @@ const mentors = await getCollection("mentors");
               {mentor.data.name}
             </h1>
 
-            <div class={"flex flex-row gap-x-8 items-stretch justify-between px-[10%] " + ((i%2===0)?" [direction:rtl]":"")}>
-              <div class="relative aspect-square h-auto shrink-0 justify-self-center">
+            <div
+              class={
+                "mentor-row grid gap-4 sm:auto-rows-fr grid-cols-1 lg:flex lg:flex-row lg:items-stretch h-fit gap-x-8 items-stretch justify-between mx-auto max-w-7xl w-full p-4 bg-secondary border-accent border-4 rounded-2xl lg:" +
+                (i % 2 === 0 ? "[direction:rtl]" : "[direction:ltr]")
+              }
+            >
+              <div class="mentor-image-wrap justify-self-center lg:relative flex-1 min-h-0 overflow-hidden w-full lg:w-fit">
                 <Image
                   src={mentor.data.image}
-                  alt="hello world"
-                  class="rounded-full absolute inset-0 w-full h-full object-cover"
+                  alt="Mentor"
+                  class="lg:absolute rounded-full h-full object-cover aspect-square w-auto mx-auto"
                 />
               </div>
 
-              <div class={"p-2 grid grid-cols-[auto_1fr] gap-y-8 gap-x-4 items-center h-fit whitespace-nowrap "  + ((i%2===0)?" [direction:ltr]":"[direction:rtl]")}>
+              <div
+                class={
+                  "mentor-info-wrap p-2 grid grid-cols-[repeat(1,100%)] sm:grid-cols-[min-content_1fr] gap-y-8 gap-x-4 items-center h-fit whitespace-nowrap flex-1 w-full sm:w-fit ml-auto mr-auto lg:" +
+                  (i % 2 === 0 ? "[direction:ltr]" : "[direction:rtl]")
+                }
+              >
                 <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
                   Name
                 </h1>
-                <div class="text-4xl">{mentor.data.name}</div>
+                <div class="text-4xl text-center sm:text-start">{mentor.data.name}</div>
 
                 <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
                   Year Joined
                 </h1>
-                <div class="text-4xl">{mentor.data.year_joined}</div>
+                <div class="text-4xl text-center sm:text-start">{mentor.data.year_joined}</div>
 
                 <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
                   Career
                 </h1>
-                <div class="text-4xl">{mentor.data.career}</div>
+                <div class="text-4xl text-center sm:text-start">{mentor.data.career}</div>
 
                 <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
                   Mentor For
                 </h1>
-                <div class="text-4xl">{mentor.data.mentor_for}</div>
+                <div class="text-4xl text-center sm:text-start">{mentor.data.mentor_for}</div>
               </div>
             </div>
           </div>
@@ -60,3 +70,58 @@ const mentors = await getCollection("mentors");
     </div>
   </div>
 </Layout>
+
+<script>
+  function initMentorHeightSync() {
+    const rows = document.querySelectorAll<HTMLElement>(".mentor-row");
+    const lg = window.matchMedia("(min-width: 1024px)");
+    const sm = window.matchMedia("(min-width: 640px)");
+
+    const apply = (row: HTMLElement) => {
+      const imageWrap = row.querySelector<HTMLElement>(".mentor-image-wrap");
+      const infoWrap = row.querySelector<HTMLElement>(".mentor-info-wrap");
+      if (!imageWrap || !infoWrap) return;
+
+      if (lg.matches) {
+        // Desktop: let the existing flex `items-stretch` layout control height.
+        imageWrap.style.height = "";
+        return;
+      }
+
+      let size = infoWrap.offsetHeight;
+
+      // Don't let the image get taller than the space it actually has to be wide.
+      const availableWidth = imageWrap.clientWidth;
+      if (availableWidth > 0) {
+        size = Math.min(size, availableWidth);
+      }
+
+      // Below `sm`, shrink further to a quarter of the computed size.
+      if (!sm.matches) {
+        size = size / 2;
+      }
+
+      imageWrap.style.height = `${size}px`;
+    };
+
+    rows.forEach((row) => {
+      const infoWrap = row.querySelector<HTMLElement>(".mentor-info-wrap");
+      if (!infoWrap) return;
+
+      // Re-sync on text height changes and on row width changes
+      // (resize, font load, content reflow, etc).
+      const ro = new ResizeObserver(() => apply(row));
+      ro.observe(infoWrap);
+      ro.observe(row);
+    });
+
+    lg.addEventListener("change", () => rows.forEach((row) => apply(row)));
+    sm.addEventListener("change", () => rows.forEach((row) => apply(row)));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMentorHeightSync);
+  } else {
+    initMentorHeightSync();
+  }
+</script>

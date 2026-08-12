@@ -27,40 +27,61 @@ const { data } = entry;
       <Image
         src={data.img}
         alt={data.robot_name}
-        class="self-center h-full aspect-auto w-auto rounded-2xl"
+        class="self-center h-full aspect-auto w-auto rounded-2xl hidden xl:block"
       />
 
-      <div class="flex flex-col flex-1 justify-center p-16 border border-accent rounded-2xl bg-background">
+      <div
+        class="flex-1 justify-center p-16 border border-accent rounded-2xl bg-background"
+      >
         <div class="flex flex-col gap-1 items-center">
           <p class="text-5xl font-semibold font-audiowide">{data.robot_name}</p>
           <p class="text-shadow-md text-primary text-3xl">
             {data.competition_type} &middot; {data.year} &middot; {data.title}
           </p>
         </div>
-        <div class="flex flex-col gap-1 flex-1 justify-center w-[80%] self-center">
-          <p class="text-3xl font-semibold font-audiowide">
-            {"Weight: " + data.weight}
-          </p>
-          <p class="text-3xl font-semibold font-audiowide">
-            {"Dimensions: " + data.dimensions}
-          </p>
-          <p class="text-3xl font-semibold font-audiowide">
-            Notable Features:
-            <ul>
-              {
-                data.notable_features.map((feature: string) => (
-                  <li class="text-3xl font-semibold font-audiowide">
-                    &emsp;- {feature}
-                  </li>
-                ))
-              }
-            </ul>
-          </p>
 
-          <div class="m-4"></div>
+        <div class="w-[80%] mx-auto mt-8">
+          <Image
+            src={data.img}
+            alt={data.robot_name}
+            class="flex-1 aspect-auto rounded-2xl mx-auto lg:hidden"
+          />
+          <div
+            class="flex flex-col h-full gap-1 flex-1 justify-start mt-8"
+          >
+            <div class="flex flex-row justify-between flex-1">
+              <Image
+                src={data.img}
+                alt={data.robot_name}
+                class="self-center h-full aspect-auto w-auto rounded-2xl hidden lg:block xl:hidden"
+              />
+              <div class="w-fit h-fit my-auto">
+                <p class="text-3xl font-semibold font-audiowide">
+                  {"Weight: " + data.weight}
+                </p>
+                <p class="text-3xl font-semibold font-audiowide">
+                  {"Dimensions: " + data.dimensions}
+                </p>
+                <p class="text-3xl font-semibold font-audiowide">
+                  Notable Features:
+                  <ul>
+                    {
+                      data.notable_features.map((feature: string) => (
+                        <li class="text-3xl font-semibold font-audiowide">
+                          &emsp;- {feature}
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </p>
+              </div>
+            </div>
 
-          <div class="content text-3xl font-sans text-foreground">
-            <Content />
+            <div class="m-4"></div>
+
+            <div class="content text-3xl font-sans text-foreground">
+              <Content />
+            </div>
           </div>
         </div>
       </div>

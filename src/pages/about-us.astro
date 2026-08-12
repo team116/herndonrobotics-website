@@ -18,7 +18,7 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
 <Layout title="Who Are We?">
   <div class="p-8 gap-12 flex flex-col">
     <section id="WhoAreWe">
-      <div class="flex flex-col flex-1 justify-center w-[75%] mx-auto">
+      <div class="flex flex-col flex-1 justify-center max-w-[100rem] mx-auto">
         <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
           <i>Who Are We?</i>
         </h2>
@@ -98,7 +98,7 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
             )
           }
         </div>
-        <div class="grid grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           {
             portfolio
               .sort((a, b) => {
@@ -135,7 +135,7 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
         <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
           <i>Team Members</i>
         </h2>
-        <div class="grid grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <TeamCard
             href="/team-members/mentors"
             image={placeholder_img}
@@ -162,7 +162,7 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
         <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
           <i>Sponsors</i>
         </h2>
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
           {
             Object.values(sponsors).map((image) => (
               <Image

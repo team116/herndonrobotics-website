@@ -37,9 +37,9 @@ const { title, single_screen = false } = Astro.props;
       media.addEventListener("change", applyTheme);
     </script>
   </head>
-  <body class={"flex flex-col min-h-dvh " + (single_screen?"h-dvh":"")}>
+  <body class={"flex flex-col min-h-dvh bg-muted " + (single_screen?"h-dvh":"")}>
     <NavMenu />
-    <main class="flex-1 flex flex-col">
+    <main class="flex-1 flex flex-col bg-background">
       <slot />
     </main>
     <Footer />

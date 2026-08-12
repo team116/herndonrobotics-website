@@ -88,7 +88,7 @@ html {
 
 @media (max-width: 768px) {
   html {
-    font-size: calc(13/16 * 100%);
+    font-size: calc(11/16 * 100%);
   }
 }
 
