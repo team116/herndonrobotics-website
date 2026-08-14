@@ -11,7 +11,7 @@ const portfolio = await getCollection("portfolio");
     <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
       <i>Portfolio</i>
     </h2>
-    <div class="grid grid-cols-4 gap-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       {
         portfolio
           .sort((a, b) => {

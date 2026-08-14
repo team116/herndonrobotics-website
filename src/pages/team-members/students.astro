@@ -26,6 +26,7 @@ const max_year = Math.max(...years);
       captains: false, //should only show captains, but doesnt work
       roles: student_roles.map(() => true) as boolean[],
       years: [min_year, max_year] as Pair,
+      sidebar_open: false,
 
       filtered(data: InferEntrySchema<"students">) {
         if (this.captains && !data.captain) {
@@ -63,11 +64,11 @@ const max_year = Math.max(...years);
       },
 
       all_roles: {
-        [":checked"](){
+        [":checked"]() {
           return this.get_all_state() === "on";
         },
 
-        [":intermediate"](){
+        [":intermediate"]() {
           let inp = this.$el as HTMLInputElement;
           inp.indeterminate = this.get_all_state() === "intermediate";
         },
@@ -87,105 +88,147 @@ const max_year = Math.max(...years);
 </script>
 
 <Layout title="Students">
-  <div class="m-8">
+  <div class="flex flex-1">
     <div
-      class="grid grid-cols-[1fr_5fr]"
+      class="lg:grid lg:grid-cols-[1fr_5fr] relative overflow-hidden lg:overflow-visible flex-1"
       x-data="student_search"
       data-min-year={min_year}
       data-max-year={max_year}
       id="search-root"
     >
+      <!-- mobile backdrop -->
+      <div
+        x-show="sidebar_open"
+        x-transition.opacity
+        x-cloak
+        @click="sidebar_open = false"
+        class="absolute inset-0 bg-black/50 z-30 lg:hidden"
+      >
+      </div>
+
       <!-- search -->
-      <div class="bg-secondary rounded-2xl p-6 h-fit flex flex-col gap-6">
-        <!-- name search -->
-        <div class="flex flex-col gap-2">
-          <label
-            for="name_search"
-            class="font-audiowide text-lg text-foreground"
+      <div
+        class="absolute inset-y-0 left-0 z-40 w-72 max-w-[80%]
+    transition-transform duration-300 ease-in-out -translate-x-full
+    lg:static lg:z-auto lg:w-auto lg:max-w-none lg:h-fit lg:translate-x-0
+    lg:m-8"
+        :class="sidebar_open && '!translate-x-0'"
+      >
+        <!-- toggle chevron, attached to the wrapper's edge so it slides with it -->
+        <button
+          type="button"
+          @click="sidebar_open = !sidebar_open"
+          class="lg:hidden absolute top-4 -right-12 z-50 bg-primary text-foreground rounded-full p-2 shadow-lg transition-transform duration-300"
+          :class="sidebar_open && 'rotate-180'"
+          aria-label="Toggle filters"
+        >
+          <svg
+            class="w-5 h-5  scale-150 origin-center"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            Name
-          </label>
-          <input
-            id="name_search"
-            type="text"
-            x-model="name_search"
-            placeholder="Search by name..."
-            class="rounded-lg border-2 border-accent bg-background px-3 py-2 text-foreground"
-          />
-        </div>
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
 
-        <!-- captains only -->
-        <div class="flex items-center gap-2">
-          <input
-            id="captains"
-            type="checkbox"
-            x-model="captains"
-            class="w-5 h-5 accent-primary"
-          />
-          <label for="captains" class="font-audiowide text-foreground">
-            Captains only
-          </label>
-        </div>
-
-        <!-- year range -->
-        <div class="flex flex-col gap-2">
-          <label class="font-audiowide text-lg text-foreground">
-            Year: <span x-text="years[0]"></span> &ndash; <span
-              x-text="years[1]"></span>
-          </label>
-          <div class="flex items-center gap-2">
+        <!-- scrollable content, now the ONLY element with overflow-y-auto -->
+        <div
+          class="bg-secondary p-6 flex flex-col gap-6 overflow-y-auto h-full rounded-none lg:rounded-2xl"
+        >
+          <!-- name search -->
+          <div class="flex flex-col gap-2">
+            <label
+              for="name_search"
+              class="font-audiowide text-lg text-foreground"
+            >
+              Name
+            </label>
             <input
-              type="number"
-              x-model.number="years[0]"
-              min={min_year}
-              max={max_year}
-              class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
-            />
-            <span class="text-foreground">to</span>
-            <input
-              type="number"
-              x-model.number="years[1]"
-              min={min_year}
-              max={max_year}
-              class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
+              id="name_search"
+              type="text"
+              x-model="name_search"
+              placeholder="Search by name..."
+              class="rounded-lg border-2 border-accent bg-background px-3 py-2 text-foreground"
             />
           </div>
-        </div>
 
-        <!-- roles -->
-        <div class="flex flex-col gap-2">
-          <span class="font-audiowide text-lg text-foreground">Roles</span>
-          <div class="flex flex-col gap-1">
+          <!-- captains only -->
+          <div class="flex items-center gap-2">
+            <input
+              id="captains"
+              type="checkbox"
+              x-model="captains"
+              class="w-5 h-5 accent-primary"
+            />
+            <label for="captains" class="font-audiowide text-foreground">
+              Captains only
+            </label>
+          </div>
+
+          <!-- year range -->
+          <div class="flex flex-col gap-2">
+            <label class="font-audiowide text-lg text-foreground">
+              Year: <span x-text="years[0]"></span> &ndash; <span
+                x-text="years[1]"></span>
+            </label>
             <div class="flex items-center gap-2">
               <input
-                id=`role_all`
-                type="checkbox"
-                checked
-                x-bind="all_roles"
-                class="w-5 h-5 accent-primary"
+                type="number"
+                x-model.number="years[0]"
+                min={min_year}
+                max={max_year}
+                class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
               />
-              <label for=`role_all` class="text-foreground"> All </label>
+              <span class="text-foreground">to</span>
+              <input
+                type="number"
+                x-model.number="years[1]"
+                min={min_year}
+                max={max_year}
+                class="w-20 rounded-lg border-2 border-accent bg-background px-2 py-1 text-foreground"
+              />
             </div>
-            {
-              student_roles.map((role, i) => (
-                <div class="flex items-center gap-2">
-                  <input
-                    id={`role_${i}`}
-                    type="checkbox"
-                    x-model={`roles[${i}]`}
-                    class="w-5 h-5 accent-primary"
-                  />
-                  <label for={`role_${i}`} class="text-foreground">
-                    {role}
-                  </label>
-                </div>
-              ))
-            }
+          </div>
+
+          <!-- roles -->
+          <div class="flex flex-col gap-2">
+            <span class="font-audiowide text-lg text-foreground">Roles</span>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <input
+                  id=`role_all`
+                  type="checkbox"
+                  checked
+                  x-bind="all_roles"
+                  class="w-5 h-5 accent-primary"
+                />
+                <label for=`role_all` class="text-foreground"> All </label>
+              </div>
+              {
+                student_roles.map((role, i) => (
+                  <div class="flex items-center gap-2">
+                    <input
+                      id={`role_${i}`}
+                      type="checkbox"
+                      x-model={`roles[${i}]`}
+                      class="w-5 h-5 accent-primary"
+                    />
+                    <label for={`role_${i}`} class="text-foreground">
+                      {role}
+                    </label>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
       <!-- students -->
-      <div>
+      <div class="mt-8">
         <h2 class="text-8xl font-audiowide mb-4 text-foreground m-auto w-fit">
           <i>Students</i>
         </h2>
@@ -214,7 +257,7 @@ const max_year = Math.max(...years);
               .map((student) => (
                 <div
                   class:list={[
-                    "bg-secondary rounded-2xl p-2 text-3xl w-fit",
+                    "bg-secondary rounded-2xl p-2 text-2xl lg:text-3xl w-fit",
                     student.data.captain
                       ? "border-primary border-4"
                       : "border-accent border-3",
