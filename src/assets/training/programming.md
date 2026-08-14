@@ -1,5 +1,5 @@
 ---
-title: "Programming"
+title: "Coding"
 doc_location: "programming"
 ---
 There are many ways to learn programming.

@@ -5,7 +5,7 @@ const info = [
   {
     id: "new-member",
     title: "New Member",
-    contact: "jas.carlier11@gmail.com",
+    contact: "student-interest@herndonrobotics.org",
     instructions: [
       "Check the calendar (under Current Members)",
       "Show up to a meeting",
@@ -18,33 +18,52 @@ const info = [
       "Build Robots",
       "Grow your skills",
       "Meet like-minded people",
+      "Meetings Tuesdays & Thursdays 7-9PM"
     ],
   },
   {
     id: "new-mentors",
     title: "New Mentor",
-    contact: "example@example.com",
-    instructions: ["no clue"],
+    contact: "mentors@herndonrobotics.org",
+    instructions: [
+      "Email our leadership for more details",
+    ],
     involvement: "Guide the next generation and experience their growth!",
-    expectations: ["Teach Students", "Advise Members", "etc..."],
+    expectations: [
+      "Teach Students",
+      "Advise Members",
+      "Meetings Tuesdays & Thursdays 7-9PM",
+      "Search 'FIRST Mentor Manual' for more details"
+    ],
   },
 
   {
     id: "plan-outreach",
     title: "Outreach",
-    contact: "example@example.com",
-    instructions: ["no clue"],
-    involvement: "Lorem ipsum",
-    expectations: ["can't wait for someone else to fill this in"],
+    contact: "leadership@herndonrobotics.org",
+    instructions: [
+      "Contact us with your questions",
+      "Set up an event with us",
+    ],
+    involvement: "Outreach brings STEM programs to expose our community to the world of robots",
+    expectations: [
+      "Robotics Event",
+      "We will work with you set up a time and date",
+    ],
   },
 
   {
     id: "new-sponsor",
     title: "Sponsor",
-    contact: "example@example.com",
-    instructions: ["no clue"],
-    involvement: "Lorem ipsum",
-    expectations: ["can't wait for someone else to fill this in"],
+    contact: "leadership@herndonrobotics.org",
+    instructions: [
+      "Contact us for info about how to support us"
+    ],
+    involvement: "",
+    expectations: [
+      "Furthering STEM education",
+      "Team materials and expenses"
+    ],
   },
 ];
 ---
@@ -86,20 +105,21 @@ const info = [
             <div>
               <p class="text-6xl">{card.involvement}</p>
               <br />
-              <p class="mt-2 text-5xl">
-                <strong>Contact:</strong>{" "}
+              <div class="mt-2 text-5xl flex flex-row flex-wrap items-end">
+                <strong>Contact:&nbsp;</strong>{" "}
+                <span class="inline sm:hidden"><br></span>
                 <a
                   href={`mailto:${card.contact}`}
-                  class="relative text-[2.625rem] sm:text-5xl after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                  class="relative text-4xl after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
                 >
                   {card.contact}
                 </a>
-              </p>
+              </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16 my-auto p-16 h-min">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16 my-auto p-8 sm:p-16 h-min">
               <h3 class="font-audiowide text-primary-foreground w-fit text-6xl">
-                How to Join
+                Getting Involved
               </h3>
               <h3 class="font-audiowide text-primary-foreground w-fit text-6xl">
                 What to Expect
