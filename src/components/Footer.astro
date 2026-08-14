@@ -5,9 +5,12 @@ import { social_links } from "../utils/socials";
 <div
   class="flex flex-row w-full h-24 bg-muted px-10 font-geist text-gray-500 justify-between border-border border-t"
 >
-  <div class="content-center text-lg lg:text-2xl">
+  <div class="content-center text-lg hidden lg:text-2xl sm:block">
     © {new Date().getFullYear()} Herndon Robotics | Epsilon Delta | FRC 116 | FTC
     519
+  </div>
+  <div class="content-center text-lg lg:text-2xl sm:hidden">
+    © {new Date().getFullYear()} Herndon Robotics
   </div>
   <div
     class="flex flex-row items-center h-full aspect-square g-2 text-2xl"

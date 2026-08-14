@@ -5,11 +5,12 @@ const info = [
   {
     id: "new-member",
     title: "New Member",
-    contact: "example@example.com",
+    contact: "jas.carlier11@gmail.com",
     instructions: [
-      "Show up to meetings",
+      "Check the calendar (under Current Members)",
+      "Show up to a meeting",
+      "Join our forum/Slack",
       "Complete shop training",
-      "Join our Slack",
     ],
     involvement: "Join us and start building robots and learning STEM!",
     expectations: [
@@ -50,17 +51,17 @@ const info = [
 
 <Layout title="Getting Involved" single_screen={true}>
   <div
-    class="m-8 flex-1 flex flex-col gap-4"
+    class="m-4 sm:m-8 flex-1 flex flex-col gap-4"
     x-data={`{active: window.location.hash.slice(1) || '${info[0].id}'}`}
     x-init={`window.addEventListener('hashchange', () => { active = window.location.hash.slice(1) || '${info[0].id}' })`}
   >
-    <div class="flex justify-center gap-4 font-audiowide text-5xl">
+    <div class="flex justify-center gap-4 font-audiowide  align-middle items-center text-3xl lg:text-5xl">
       {
         info
           .map((card) => (
             <a href={`#${card.id}`}>
               <div
-                class="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                class="relative text-center after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
                 x-bind:class={`{'after:scale-x-100': active=='${card.id}'}`}
               >
                 {card.title}
@@ -68,7 +69,7 @@ const info = [
             </a>
           ))
           .flatMap((item, index, array) =>
-            index < array.length - 1 ? [item, <h1>|</h1>] : [item],
+            index < array.length - 1 ? [item, <h1 class="hidden sm:block">|</h1>] : [item],
           )
       }
     </div>
@@ -89,22 +90,22 @@ const info = [
                 <strong>Contact:</strong>{" "}
                 <a
                   href={`mailto:${card.contact}`}
-                  class="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                  class="relative text-[2.625rem] sm:text-5xl after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
                 >
                   {card.contact}
                 </a>
               </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-x-8 gap-y-4 flex-1 items-stretch p-16 h-min">
-              <h3 class="font-audiowide text-primary-foreground mx-auto w-fit text-6xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16 my-auto p-16 h-min">
+              <h3 class="font-audiowide text-primary-foreground w-fit text-6xl">
                 How to Join
               </h3>
-              <h3 class="font-audiowide text-primary-foreground mx-auto w-fit text-6xl">
+              <h3 class="font-audiowide text-primary-foreground w-fit text-6xl">
                 What to Expect
               </h3>
 
-              <ol class="list-decimal list-inside space-y-2 text-5xl">
+              <ol class="list-decimal list-inside space-y-2 text-5xl row-2">
                 {card.instructions.map((step) => (
                   <li>{step}</li>
                 ))}
