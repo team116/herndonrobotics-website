@@ -111,7 +111,6 @@ const sections = [
         </template>
       </div>
     ))}
-    <a href={withBase('/blog')} class={navItemClass}>Blog</a>
   </nav>
 
   <!-- Hamburger toggle: shown when the full nav doesn't fit -->
@@ -167,8 +166,6 @@ const sections = [
         </ul>
       </div>
     ))}
-
-    <a href={withBase('/blog')} class={`${navItemClass} block`} @click="mobileOpen = false">Blog</a>
 
     <div class="flex flex-row gap-4 pt-2 md:hidden" id="socials-mobile">
       {social_links.map((social) => (
