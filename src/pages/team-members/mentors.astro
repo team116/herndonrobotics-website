@@ -25,8 +25,8 @@ const mentors = await getCollection("mentors");
 
             <div
               class={
-                "mentor-row grid gap-4 sm:auto-rows-fr grid-cols-1 lg:flex lg:flex-row lg:items-stretch h-fit gap-x-8 items-stretch justify-between mx-auto max-w-7xl w-full p-4 bg-secondary border-accent border-4 rounded-2xl lg:" +
-                (i % 2 === 0 ? "[direction:rtl]" : "[direction:ltr]")
+                "mentor-row grid gap-4 sm:auto-rows-fr grid-cols-1 lg:flex lg:flex-row lg:items-stretch h-fit gap-x-8 items-stretch justify-between mx-auto max-w-7xl w-full p-4 bg-secondary border-accent border-4 rounded-2xl " +
+                (i % 2 === 0 ? "lg:[direction:rtl]" : "lg:[direction:ltr]")
               }
             >
               <div class="mentor-image-wrap justify-self-center lg:relative flex-1 min-h-0 overflow-hidden w-full lg:w-fit">
@@ -39,8 +39,8 @@ const mentors = await getCollection("mentors");
 
               <div
                 class={
-                  "mentor-info-wrap p-2 grid grid-cols-[repeat(1,100%)] sm:grid-cols-[min-content_1fr] gap-y-8 gap-x-4 items-center h-fit whitespace-nowrap flex-1 w-full sm:w-fit ml-auto mr-auto lg:" +
-                  (i % 2 === 0 ? "[direction:ltr]" : "[direction:rtl]")
+                  "mentor-info-wrap p-2 grid grid-cols-[repeat(1,100%)] sm:grid-cols-[min-content_1fr] gap-y-8 gap-x-4 items-center h-fit whitespace-nowrap flex-1 w-full sm:w-fit ml-auto mr-auto " +
+                  (i % 2 === 0 ? "lg:[direction:ltr]" : "lg:[direction:rtl]")
                 }
               >
                 <h1 class="bg-primary font-audiowide text-4xl rounded px-2 text-center">
