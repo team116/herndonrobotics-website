@@ -17,6 +17,17 @@ const current_events = [
     url: "https://www.youtube.com/watch?v=gO98TkgY0kI&list=PLPkqrzYczT1I",
   },
 ];
+
+const forms = [
+  {
+    title: "Emergency Care Form",
+    file_name: "EmergencyCareForm.pdf",
+  },
+  {
+    title: "Field Trip Form",
+    file_name: "Field Trip Form.pdf",
+  },
+];
 ---
 
 <Layout title="Current Member">
@@ -65,26 +76,20 @@ const current_events = [
         </h2>
       </div>
       <div class="flex flex-col gap-8">
-        <div
+        {
+          forms.map((form)=>(
+            <div
           class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10"
         >
           <p class="font-sans text-8xl font-bold w-fit mx-auto text-center">
-            Emergency Care Form
+            {form.title}
           </p>
           <iframe
-            src="/forms/EmergencyCareForm.pdf"
+            src={"/forms/" + form.file_name}
             class="w-[80%] aspect-11/8 m-auto"></iframe>
         </div>
-        <div
-          class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10"
-        >
-          <p class="font-sans text-8xl font-bold w-fit mx-auto text-center">
-            Field Trip Form
-          </p>
-          <iframe
-            src="/forms/sample-local-pdf.pdf"
-            class="w-[80%] aspect-11/8 m-auto"></iframe>
-        </div>
+          ))
+        }
       </div>
     </section>
 
