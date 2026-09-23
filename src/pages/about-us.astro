@@ -162,13 +162,15 @@ const sponsors = import.meta.glob<{ default: ImageMetadata }>(
         <h2 class="text-6xl font-audiowide mb-4 text-primary-foreground">
           <i>Sponsors</i>
         </h2>
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]">
+        <div
+          class="columns-2 sm:columns-3 md:columns-4 gap-4 [column-fill:balance] transform-[scaleY(-1)]"
+        >
           {
             Object.values(sponsors).map((image) => (
               <Image
                 src={image.default}
-                alt={"sponsor"}
-                class="aspect-square w-full"
+                alt="sponsor"
+                class="w-full mb-4 break-inside-avoid transform-[scaleY(-1)] rounded-2xl"
               />
             ))
           }
