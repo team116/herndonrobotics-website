@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import PdfViewer from "../components/PdfViewer.astro";
 
 const training = await Promise.all(
   (await getCollection("training")).map(async (entry) => ({
@@ -77,17 +78,32 @@ const forms = [
       </div>
       <div class="flex flex-col gap-8">
         {
-          forms.map((form)=>(
-            <div
-          class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10"
-        >
-          <p class="font-sans text-8xl font-bold w-fit mx-auto text-center">
-            {form.title}
-          </p>
-          <iframe
-            src={"/forms/" + form.file_name}
-            class="w-[80%] aspect-11/8 m-auto"></iframe>
-        </div>
+          forms.map((form) => (
+            <div class="ring-4 ring-accent rounded-2xl p-8 bg-secondary transition-all flex flex-col gap-4 mx-10">
+              <a
+                href={"/forms/" + form.file_name}
+                download={form.title + ".pdf"}
+                class="flex items-center justify-center gap-3 mx-auto"
+              >
+                <p class="font-sans text-7xl sm:text-8xl font-bold w-fit mx-auto text-center">
+                  {form.title}
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="w-[1em] h-[1em] text-7xl sm:text-8xl"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </a>
+            </div>
           ))
         }
       </div>
