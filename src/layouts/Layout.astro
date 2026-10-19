@@ -20,14 +20,14 @@ const { title, single_screen = false } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} · Herndon Robotics</title>
 
-    <!-- Initialize Alpine and make it globally accessible so that one components can access and use it-->
+    <!-- Components register Alpine.data() handlers before Alpine starts at the end of the body. -->
     <script>
       import Alpine from "alpinejs";
       window.Alpine = Alpine;
     </script>
 
     <!--
-      this code is to prevent the color from flashing when the page loads and also toggle dark-mode automatically when the mode changes
+      Apply the system color preference before the page paints, then keep it in sync if the preference changes.
     -->
     <script is:inline>
       const media = window.matchMedia("(prefers-color-scheme: dark)");
