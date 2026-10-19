@@ -1,5 +1,5 @@
 /**
- * Builds a URL relative to the site's base path.
+ * Build a URL relative to Astro's configured base path.
  * Handles leading/trailing slashes so you never get double slashes.
  */
 export function withBase(path: string): string {
@@ -10,7 +10,7 @@ export function withBase(path: string): string {
 }
 
 /**
- * Builds an absolute URL (base + path), for things like og:image
+ * Build an absolute URL (base + path), for metadata such as `og:image`
  * that need a full URL rather than a relative path.
  */
 export function withSite(path: string): string {

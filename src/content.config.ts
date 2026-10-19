@@ -5,6 +5,7 @@ import { docsSchema } from "@astrojs/starlight/schema";
 import { glob } from "astro/loaders";
 import { student_roles } from "./utils/student_roles";
 
+// These schemas define the fields page templates can expect from each content entry.
 const portfolio = defineCollection({
   loader: glob({ pattern: "*.{md,mdx}", base: "./src/assets/portfolio" }),
   schema: ({ image }) =>
@@ -35,6 +36,7 @@ const mentors = defineCollection({
     }),
 });
 
+// Student roles are shared with the directory filter, so keep schema and UI options aligned.
 const students = defineCollection({
   loader: glob({
     pattern: "**/*.json",

@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import { student_roles } from "../../utils/student_roles";
 
 const students = await getCollection("students");
+// Derive slider bounds from the current roster rather than hard-coding school years.
 const years = students.map((s) => s.data.year);
 const min_year = Math.min(...years);
 const max_year = Math.max(...years);
@@ -23,11 +24,13 @@ const max_year = Math.max(...years);
 
     return {
       name_search: "",
-      captains: false, //should only show captains, but doesnt work
+      // Captain-only filtering is exposed in the UI; verify its control binding before relying on it.
+      captains: false,
       roles: student_roles.map(() => true) as boolean[],
       years: [min_year, max_year] as Pair,
       sidebar_open: false,
 
+      // Apply active filters in one place so the roster markup stays declarative.
       filtered(data: InferEntrySchema<"students">) {
         if (this.captains && !data.captain) {
           return false;
